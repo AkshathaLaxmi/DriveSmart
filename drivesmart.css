@@ -1,8 +1,8 @@
 body {
-    background-color: #d6eff3;
+    background-image: linear-gradient(to right, #c9eef5, #1da1df);
 }
 #sign {
-    color: #009bb6;
+    color: #041d22;
 }
 #sign :hover{
     color: #1388a5;
@@ -14,7 +14,7 @@ body {
 
 #homelink{
     text-decoration: none;
-    color: #3197c7;
+    color: #1c267e;
 }
 
 #head{
@@ -26,10 +26,10 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #3197c7;
+    background-color: #1c267e;
 }
 
-#navbar li{
+#navbar li {
     float: left;
 }
 
@@ -41,9 +41,10 @@ body {
     text-decoration: none;
 }
 
-#navbar li a:hover{
+#navbar li a:hover {
     background-color: black;
 }
+
 
 #main{
 	float:left;
