@@ -21,7 +21,7 @@ body {
     margin-bottom: 0%;
 }
 
-#navbar ul{
+#navbar {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -45,4 +45,18 @@ body {
     background-color: black;
 }
 
+#main{
+	float:left;
+	width:70%;
+
+	box-sizing: border-box;
+}
+
+#side{
+	float:right;
+	width:30%;
+	min-height: 200px;
+	
+	box-sizing: border-box;
+}
 
