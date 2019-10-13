@@ -1,36 +1,39 @@
+body {
+    background-color: #d6eff3;
+}
 #sign {
-    color: brown;
+    color: #009bb6;
 }
 #sign :hover{
-    color: red;
+    color: #1388a5;
 }
 
 #sign :visited{
-    color: red;
+    color: black;
 }
 
 #homelink{
     text-decoration: none;
-    color: black;
+    color: #3197c7;
 }
 
 #head{
     margin-bottom: 0%;
 }
 
-#navbar{
+#navbar ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: brown;
+    background-color: #3197c7;
 }
 
-li {
+#navbar li {
     float: left;
 }
 
-li a{
+#navbar li a{
     display: block;
     color: white;
     text-align: center;
@@ -38,7 +41,8 @@ li a{
     text-decoration: none;
 }
 
-li a:hover {
+#navbar li a:hover {
     background-color: black;
 }
+
 
