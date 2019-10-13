@@ -21,7 +21,7 @@ body {
     margin-bottom: 0%;
 }
 
-#navbar {
+#navbar ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -29,7 +29,7 @@ body {
     background-color: #3197c7;
 }
 
-#navbar li {
+#navbar li{
     float: left;
 }
 
@@ -41,7 +41,7 @@ body {
     text-decoration: none;
 }
 
-#navbar li a:hover {
+#navbar li a:hover{
     background-color: black;
 }
 
@@ -49,14 +49,18 @@ body {
 	float:left;
 	width:70%;
 
+	margin: 0;
+	padding:0;
 	box-sizing: border-box;
+
 }
 
 #side{
-	float:right;
+	float:left;
 	width:30%;
-	min-height: 200px;
-	
+
+	margin:0;
+	padding:0;
 	box-sizing: border-box;
 }
 
