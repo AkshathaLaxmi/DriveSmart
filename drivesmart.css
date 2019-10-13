@@ -48,7 +48,6 @@ body {
 #main{
 	float:left;
 	width:70%;
-
 	margin: 0;
 	padding:0;
 	box-sizing: border-box;
@@ -58,9 +57,10 @@ body {
 #side{
 	float:left;
 	width:30%;
-
 	margin:0;
 	padding:0;
 	box-sizing: border-box;
 }
-
+ ul#list {
+  list-style-type: circle;
+}
