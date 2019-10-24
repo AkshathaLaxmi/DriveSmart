@@ -29,6 +29,10 @@ body {
     background-color: #1c267e;
 }
 
+#sign:hover{
+    color: white;
+}
+
 #navbar li {
     float: left;
 }
@@ -43,6 +47,7 @@ body {
 
 #navbar li a:hover {
     background-color: black;
+    font-size: 17px;
 }
 
 
@@ -62,7 +67,6 @@ body {
 	padding:0;
 	box-sizing: border-box;
 }
-
-ul#list {
+ ul#list {
   list-style-type: circle;
 }
