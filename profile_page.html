@@ -21,29 +21,38 @@
 		#ProfilePage
 		{
     		/* Move it off the top of the page, then centre it horizontally */
-    		margin: 50px auto;
+    		margin: 20px auto;
     		width: 80%;
+    		height:80%;
+    		padding:10px;
+    		background-color:#5ab9ea;
 		}
 		#LeftCol
 		{
     		/* Move it to the left */
     		float: left;
-		    width: 220px;
+		    width: 250px;
+		    margin:25px 20px;
     		text-align: center;
 		}
 		#Info
 		{
     		width: 600px;
-    		text-align: center;
-			margin-left:100px;
+			margin-left:80px;
     		/* Move it to the right */
 		    float: left;
+		}
+		#name{
+			font-size:20px;
+		}
+		#Info{
+			font-family:"Lucida Console","Georgia";
 		}
 		</style>
 		</head>
     <body>
-      <div>
-        <table>
+    	<div>
+    	<table>
           <tr>
             <td>
               <h1 align="left"><a id ="homelink" href="./home.html">DriveSmart</a></h1>
@@ -65,15 +74,28 @@
                 <li><a href="./contact-us.html">Contact Us</a></li>
             </ul>
         </div>
-		<div id="Profilepage">
+        <p align="right"><a id="edit" href="./edit.html">EDIT</a></p>
+		<section id="Profilepage">
 			<div id="LeftCol">
 				<i><img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg" align="center" width="200px" height="200px"></i>		
 			</div>
 			<div id="Info">
-			
+				<p id="name"><b>SAMPLE NAME</b></p>
+				<p><b>Location: </b><br/>
+				<span id="addr">hi jfnvjkndjvsndicjnwjcv <br/>
+				runcfiuwefnciurncre<br/>
+				refnrwuifhweuifnruifc<br/></span>
+				</p>
+				<p><b>Phone:</b><br />
+				<span id="phone"> 92xxxxxxx0 </span>
+				</p>
+				<p><b>Username:</b><br />
+				<span id="usrname">sample23 </span>
+				</p>
 			</div>
-		</div>
-		
+		</section>
+	</body>
+</html>	
 		
 		
 		
