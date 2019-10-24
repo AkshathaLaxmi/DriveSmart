@@ -1,5 +1,5 @@
 body {
-    background-image: linear-gradient(to right, #c9eef5, #5ecbfd);
+    background-image: radial-gradient(#c9eef5, #5ecbfd);
 }
 #sign {
     color: #041d22;
