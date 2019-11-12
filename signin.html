@@ -4,7 +4,13 @@
         <title>DriveSmart</title>
         <link rel = "stylesheet" href="./drivesmart.css">
         <style>
-            body {font-family: Arial, Helvetica, sans-serif;}
+            body {font-family: Arial, Helvetica, sans-serif;
+              background-image: url("./images/bgimg.jpg");
+              height: 100%;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: cover;
+            }
             * {box-sizing: border-box;}
             
             
@@ -26,7 +32,7 @@
             
             /* Set a style for all buttons */
             button {
-              background-color: #1c267e;
+              background-color: #1388a5;
               color: white;
               padding: 14px 20px;
               margin: 8px 0;
@@ -48,7 +54,11 @@
             
             .signupbtn, .signinbtn {
                 padding: 14px 20px;
+<<<<<<< HEAD
+                background-color: #1388a5;
+=======
                 background-color: #1c267e;
+>>>>>>> 863760622740d89e2df0e8693e587cd8677e97a3
             }
             /* Float cancel and signup buttons and add an equal width */
             .cancelbtn, .signupbtn, .signinbtn {
@@ -71,7 +81,7 @@
               width: 100%; /* Full width */
               height: 100%; /* Full height */
               overflow: auto; /* Enable scroll if needed */
-              background-color: #474e5d;
+              
               padding-top: 50px;
             }
             
@@ -126,6 +136,7 @@
             }
             </style>
             <body>
+              <div class="bg-img">
                     <h1 align="left"><a id ="homelink" href="./home.html">DriveSmart</a></h1>
                     <div id="navbar">
                         <ul>
@@ -137,7 +148,7 @@
                         </ul>
                     </div>
             <br><br><br><br><br>
-            <h2 align="center">Sign in or sign up here now!!</h2> 
+            <h2 align="center" style="color: rgb(77, 167, 219);">Sign in or sign up here now!!</h2> 
             <center>
             <button onclick="document.getElementById('id01').style.display='block'" style="width:90px; height: 55px; padding: 8px; margin-top: auto;"><h3>Sign Up</h3></button>
             <button onclick="document.getElementById('id02').style.display='block'" style="width:90px; height: 55px; padding: 8px; margin-top: auto;"><h3>Sign in</h3></button>
@@ -177,7 +188,11 @@
             </div>
             <div id="id02" class="modal">
                     <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+<<<<<<< HEAD
+                    <form class="modal-content">
+=======
                     <form class="modal-content" action="connect1.php">
+>>>>>>> 863760622740d89e2df0e8693e587cd8677e97a3
                       <div class="container">
                         <h1>Sign In</h1>
                         <hr>
@@ -204,7 +219,7 @@
                       </div>
                     </form>
                   </div>
-            
+              </div>
             <script>
             // Get the modal
             var modal = document.getElementById('id01');
