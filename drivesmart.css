@@ -6,7 +6,11 @@ body {
     color: #1388a5;
 }
 #sign :hover{
+<<<<<<< HEAD
     color: #f5f6f7;
+=======
+    color: #26c3eb;
+>>>>>>> 863760622740d89e2df0e8693e587cd8677e97a3
 }
 
 #sign :visited{
