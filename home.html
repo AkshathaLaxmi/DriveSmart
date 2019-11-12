@@ -2,7 +2,7 @@
 <html>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel = "stylesheet" href="./drivesmart.css">
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <head>
         <title>DriveSmart</title>
         <link rel = "stylesheet" href="./drivesmart.css">
@@ -16,9 +16,22 @@
             width: 100%;
             z-index: 1;
         }
-
-
-
+		#logo img{
+			position:relative;animation:animatetop 1s;
+		}
+		@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+		#logo{
+			background-image: url("./images/lights.jpg");
+			height: 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			
+		}
+		.mySlides img{
+			position:relative;animation:animatetop 10s;
+		}
+		@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
         .navbar a {
             float: left;
             display: block;
@@ -82,6 +95,9 @@
             display: table;
             clear: both;
         }
+        .fade-scroll-bottom{
+        	padding: none;
+        }
         </style>
         <script>
             $(document).ready(function (){
@@ -116,30 +132,30 @@
             
         </div>
         
-        <div class="container-fluid fade-scroll-bottom" style="max-height: 1000px">
-                <img class="mySlides" src="/images/red_sports_car.jpg" style="width:100%" height="900px">
-                <img class="mySlides" src="/images/red_sports_car1.jpg" style="width:100%" height="900px">
-                <img class="mySlides" src="/images/red_sports_car2.jpg" style="width:100%" height="900px">
-                <img class="mySlides" src="/images/lights.jpg" style="width:100%" height="900px">
+        <div id="logo" class="container">
+            <p style="text-align: center; padding:5px;"><img src="./images/logo1 (1).jpg" height="600px" width="400px" class="rotate90"></p>
+        </div>
+        <div class="container-fluid fade-scroll-bottom" style="max-height: 1000px;">
+                <img class="mySlides" src="./images/red_sports_car.jpg" style="width:100%" height="900px">
+                <img class="mySlides" src="./images/red_sports_car1.jpg" style="width:100%" height="900px">
+                <img class="mySlides" src="./images/red_sports_car2.jpg" style="width:100%" height="900px">
         </div>
         <div class="container">
-            <p style="text-align: center; padding:5px;"><img src="/images/logo1 (1).jpg" height="600px" width="400px" class="rotate90"></p>
-        </div>
-        <div class="container">
-            <p style="text-align:center; color: white; padding:5px;">
+            <p style="text-align:center; color: white; padding:0px;">
+            	<br><br><br><br><br><br>
                 Welcome to DriveSmart! Here we give suggestions to your local driving schools. <br>You can customise your search based on your requirement as well! <br>Come enjoy using our interface!
                 <br>Go ahead and click on this button!<br><br>
                 <button class="button">
                         <a href="./driving-schools.html">Find your driving school</a>
                 </button>
-                <br><br><br><br><br><br><br>
+                <br><br><br><br><br><br>
             </p>
         </div>
         <div class="row">
             <div class="column"></div>
         </div>
         <div class="row" id = "bottom">
-            <div class="column">Connect with us on <div class="row"><a href="https://www.facebook.com/"><img src="/images/fb.svg" height="28px" width="28px"></a></div><div class="row"><a href="https://www.twitter.com/"><img src="/images/twitter.svg" height="28px" width="28px"></a></div><div class="row"><a href="https://www.instagram.com/"><img src="/images/ig.png" height="28px" width="28px"></a></div><div class="row"><a href="https://www.linkedin.com/"><img src="/images/linkedin.png" height="28px" width="28px"></a></div></div>
+            <div class="column">Connect with us on <div class="row"><a href="https://www.facebook.com/"><img src="./images/fb.svg" height="28px" width="28px"></a></div><div class="row"><a href="https://www.twitter.com/"><img src="./images/twitter.svg" height="28px" width="28px"></a></div><div class="row"><a href="https://www.instagram.com/"><img src="./images/ig.png" height="28px" width="28px"></a></div><div class="row"><a href="https://www.linkedin.com/"><img src="./images/linkedin.png" height="28px" width="28px"></a></div></div>
             <div class="column">Thank you!<div class="row">FAQs</div><div class="row">Research</div><div class="row">APIs</div></div><br><br><br><br><br><br><br><br><br><br>
         </div>
         <script>
@@ -159,17 +175,13 @@
             }
         </script>
         <script>
-                    var fadeElBottom = $('.fade-scroll-bottom');
-
-                    $(document).on('scroll', function() {
-                        var bottomScollPos = $(document).scrollTop() + $(window).height();
-                                        
-                        fadeElBottom.each(function() {
-                            var elemOffsetTop = $(this).offset().top;
-                            if(bottomScollPos > elemOffsetTop)
-                                $(this).css('opacity', (bottomScollPos-elemOffsetTop-150)/550);
-                        });
-                    });
+                    $(document).ready(function(){
+  						$("button").click(function(){
+    					$("#div1").fadeTo("slow", 0.15);
+    					$("#div2").fadeTo("slow", 0.4);
+    					$("#div3").fadeTo("slow", 0.7);
+  });
+});
         </script>
        
         </body>
