@@ -15,7 +15,7 @@
             font-size: 16px;
         }
         .button:hover{
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
             background-color: white;
         }
 
@@ -51,16 +51,7 @@
           background-color: #112D32;
           padding: 10px;
           color: white;
-        }
-
-        .div2 {
-          width: 20%;
-          height: 400px;
-          margin: 25px;
-          background-color: #112D32;
-          padding: 10px;
-          float: left;
-          color: white;
+          height: 550px;
         }
 
         .left {
@@ -71,17 +62,40 @@
         }
 
         .div3 {
-          width: 70%;
-          height: 400px;
+          width: 100%;
+          height: 650px;
           margin: 25px;
           float: right;
           color: white;
         }
 
+        .div4{
+          float: left;
+          width: 45%;
+          height: 10%;
+        }
+        .div5{
+          float: right;
+          width: 45%;
+          height: 10%;
+        }
+
+      i{
+      background: #c1c8e4;
+      border-radius: 20px;
+      font-size: 25px;
+      text-align: center;
+      margin-right: 10px;
+      border-radius:50%;
+      display:inline-block;
+      padding:20px;
+      }
+
         #button1 a{
             text-decoration: none;
             color: white;
         }
+
 
         </style>
     </head>
@@ -110,77 +124,54 @@
             </ul>
         </div>
 
-        <div class="div1">
-            <form action="/action_page.php">
-            <label for="location"></label>
-            <input type="text" id="location" name="location" placeholder="Your location..">
-
-            <label for="vehicle">Vehicle type: </label>
-            <select id="Vehicle" name="vehicle">
-              <option value="2-Wheeler">2-Wheeler</option>
-              <option value="4-Wheeler">4-Wheeler</option>
-              <option value="Both">Both</option>
-            </select>
-
-            <input type="submit" value="Submit">
-            </form>
-      </div>
-
       <div class="div3" id = "schools">
-        <a href="test.html">
+
         <div class="div1" id = "school1">
           <table style="width:95%" cellpadding="10px">
             <tr>
-              <td><img src="https://upload.wikimedia.org/wikipedia/en/1/16/Lotus_Driving_School_Cars.JPG" alt="Image of driving school" border=1 height="150px" width="300px"></td>
+              <td><img src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGdUDZq0klQpybofqBFeAGlWcr_tr2I1Ga-jXqB4QjIjxG4JrD" border=1 height="250px" width="450px"></td>
               <td align="center">
-                Lotus Driving School
+                <h2>Tronic Driving School</h2>
                 <br>
-                <br>
+                The perfect driving school for you! Come and register with us and recieve the best services you can dream of. Highly professional staff will aid you in becoming the best driver you can be!!
                 The perfect driving school for you! Come and register with us and recieve the best services you can dream of. Highly professional staff will aid you in becoming the best driver you can be!!
               </td>
             </tr>
           </table>
-        </div>
-      </a>
-      <a href="test1.html">
-        <div class="div1" id = "school2">
-          <table style="width:95%" cellpadding="10px">
-            <tr>
-              <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGdUDZq0klQpybofqBFeAGlWcr_tr2I1Ga-jXqB4QjIjxG4JrD" alt="Image of driving school" border=1 height="150px" width="300px"></td>
-              <td align="center">
-                Tronic Driving School
-                <br>
-                <br>
-                The perfect driving school for you! Come and register with us and recieve the best services you can dream of. Highly professional staff will aid you in becoming the best driver you can be!!
-              </td>
-            </tr>
-          </table>
-        </div>
-      </a>
-      </div>
-
-      <div class="div2">
-            <h3> Filters: </h3>
-            <form action="/action_page.php" method="get">
-            <h4> Based on time of the day </h4>
-            <input type="checkbox" name="filter" value="morning"> Morning &nbsp &nbsp
-            <input type="checkbox" name="filter" value="evening"> Evening &nbsp &nbsp
-            <input type="checkbox" name="filter" value="night"> Night &nbsp &nbsp
+          <div class="div4" >
             <br>
-            <h4> Based on Licensed </h4>
-            <input type="checkbox" name="filter" value="license"> License &nbsp &nbsp
-            <input type="checkbox" name="filter" value="no_license"> No License &nbsp &nbsp
-            <h4> Based on Distance of Driving School (in Km)</h4>
-            <input type="checkbox" name="filter" value="5km"> 0-5 &nbsp &nbsp
-            <input type="checkbox" name="filter" value="10km"> 0-10 &nbsp &nbsp
-            <input type="checkbox" name="filter" value="15km"> 0-15 &nbsp &nbsp
-            <input type="checkbox" name="filter" value="rip"> 15+ &nbsp &nbsp
-            <br><br>
-            <input type="submit" value="Submit">
+            <br>
+            <table style="width:95%" cellpadding="10px">
+              <tr>
+                <td><i><img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg" alt="Image of driving school" border=1 height="70px" width="70px"></i></td>
+                <td align="center" rowspan="3">
+                  <h3> AMAZING! </h3>
+                  I loved it! Very very professional. Very friendly staff. Would highly recommend to anybody.
+                  <br>
+                  <br>
+                  Rating: 5/5
+              </tr>
+            </table>
+          </div>
+          <div class="div5">
+            <br>
+            <br>
+            <table style="width:95%" cellpadding="10px">
+              <tr>
+                <td><i><img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg" alt="Image of driving school" border=1 height="70px" width="70px"></i></td>
+                <td align="center" rowspan="3">
+                  <h3> SUPERB! </h3>
+                  I loved it! Very very professional. Very friendly staff. Would highly recommend to anybody.
+                  <br>
+                  <br>
+                  Rating: 5/5
+                </td>
+              </tr>
+            </table>
+          </div>
 
-          </form>
+        </div>
+
       </div>
-  <script type="text/javascript" src="script_results.js">
-  </script>
 </body>
 </html>
