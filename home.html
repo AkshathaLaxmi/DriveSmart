@@ -16,14 +16,28 @@
 			position:relative;animation:animatetop 1.5s;
 		}
 		@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+		
 		#logo{
 			background-image: url("./images/lights.jpg");
+			text-align: center;
 			height: 100%;
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
-			
+			height:640px;
 		}
+		
+		.Centerer{
+	    display: inline-block;
+	    height: 100%;
+	    vertical-align: middle;
+		}
+
+		.centered{
+			display: inline-block;
+    		vertical-align: middle;
+		}
+		
 		.mySlides img{
 			position:relative;animation:animatetop 10s;
 		}
@@ -42,7 +56,7 @@
 
         .button:hover{
             background-color: blue;
-            transform: scale(1.1);
+            transform: scale(1.1);</div>
         }
 
         .button a{
@@ -55,14 +69,7 @@
             text-align: center;
             margin: 20px;
         }
-        .rotate90 {
-            -webkit-transform: rotate(270deg);
-            -moz-transform: rotate(270deg);
-            -o-transform: rotate(270deg);
-            -ms-transform: rotate(270deg);
-            transform: rotate(270deg);
-            
-        }
+        
         #bottom{
             background-color: rgb(90, 90, 90);
             color:honeydew;
@@ -117,7 +124,8 @@
         </div>
         
         <div id="logo" class="container">
-            <p style="text-align: center; padding:5px;"><img src="./images/logo1 (1).jpg" height="600px" width="400px" class="rotate90"></p>
+        	<span class="Centerer"></span>
+            <img class="centered" src="./images/logo.png" style="height:150px; width:450px;"></p>
         </div>
         <div class="container-fluid fade-scroll-bottom" style="max-height: 1000px;">
                 <img class="mySlides" src="./images/red_sports_car.jpg" style="width:100%" height="900px">
@@ -175,3 +183,5 @@
         </body>
 
 </html>
+
+<p style="text-align: center; padding:5px;">
