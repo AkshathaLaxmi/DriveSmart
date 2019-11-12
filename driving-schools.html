@@ -5,6 +5,7 @@
         <title>DriveSmart</title>
         <link rel = "stylesheet" href="./drivesmart.css">
         <style>
+        
         .button{
             background-color: #3197c7;
             border: none;
@@ -41,9 +42,13 @@
           cursor: pointer;
         }
 
-        input[type=submit]:hover {
-          background-color: #45a049;
+        
+
+        .button a{
+            text-decoration: none;
+            color: black;
         }
+
 
         .div1 {
           margin: 25px;
@@ -82,7 +87,7 @@
             <ul>
                 <li><a href="./home.html">Home</a></li>
                 <li><a href="./driving-schools.html">Driving Schools</a></li>
-                <li><a href="./driving-instructions.html">Driving Instructions</a></li>
+                <li><a href="./driving-instructions.html">Driving Instructions</a></li>          
                 <li><a href="./rto-info.html">RTO Information</a></li>
                 <li><a href="./contact-us.html">Contact Us</a></li>
             </ul>
@@ -100,7 +105,9 @@
               <option value="both">Both</option>
             </select>
 
-            <input type="submit" value="Submit">
+            <button class="button">
+                <a href="./results.html">Submit</a>
+            </button>
             </form>
             </div>
 

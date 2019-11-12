@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel = "stylesheet" href="./drivesmart.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <head>
         <title>DriveSmart</title>
         <link rel = "stylesheet" href="./drivesmart.css">
         <style>
+        
+        .navbar{
+            overflow: hidden;
+            background-color: #1388a5;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+        }
+
+
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            margin-bottom: 0px;
+        }
+
+        .navbar a:hover {
+            background-color: black;
+            color: #1388a5;
+        }
         .button{
-            background-color: #1c267e;
+            background-color: #1388a5;
             border: none;
             padding: 15px 32px;
             text-align: center;
@@ -18,9 +48,9 @@
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
         }
 
-        #button1 a{
+        .button a{
             text-decoration: none;
-            color: white;
+            color: black;
         }
 
         #info{
@@ -28,65 +58,120 @@
             text-align: center;
             margin: 20px;
         }
+        .rotate90 {
+            -webkit-transform: rotate(270deg);
+            -moz-transform: rotate(270deg);
+            -o-transform: rotate(270deg);
+            -ms-transform: rotate(270deg);
+            transform: rotate(270deg);
+            
+        }
+        #bottom{
+            background-color: rgb(90, 90, 90);
+            color:honeydew;
+        }
+        .column {
+            padding: 30px;
+            float: left;
+            width: 33.33%;
+            }
+
+            /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
         </style>
+        <script>
+            $(document).ready(function (){
+            var element = document.getElementsByTagName("body");    
+            function unfade(element) {
+                
+                var op = 0.1;  // initial opacity
+                element.style.display = 'block';
+                var timer = setInterval(function () {
+                    if (op >= 1){
+                        clearInterval(timer);
+                    }
+                    element.style.opacity = op;
+                    element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+                    op += op * 0.1;
+                }, 10);
+            }
+        })
+        </script>
     </head>
     <body>
-        <div>
-            <p align="right"><a id="sign" href="./signin.html">SIGN UP | SIGN IN</a></p>
-            <h1 id="head" align="center"><a id ="homelink" href="./home.html">DriveSmart</a></h1>
-            <p align="center"><code>A solution to all queries driving</code></p>
+    
+        
+        <div class="navbar">
+            
+                <a href="./home.html">Home</a>
+                <a href="./driving-schools.html">Driving Schools</a>
+                <a href="./driving-instructions.html">Driving Instructions</a>       
+                <a href="./rto-info.html">RTO Information</a>
+                <a href="./contact-us.html">Contact Us</a>
+                <a href="./signin.html">SIGN IN | SIGN UP</a>
+            
         </div>
         
-        <div id="navbar">
-            <ul>
-                <li><a href="./home.html">Home</a></li>
-                <li><a href="./driving-schools.html">Driving Schools</a></li>
-                <li><a href="./driving-instructions.html">Driving Instructions</a></li>          
-                <li><a href="./rto-info.html">RTO Information</a></li>
-                <li><a href="./contact-us.html">Contact Us</a></li>
-            </ul>
+        <div class="container-fluid fade-scroll-bottom" style="max-height: 1000px">
+                <img class="mySlides" src="./images/red_sports_car.jpg" style="width:100%" height="900px">
+                <img class="mySlides" src="./images/red_sports_car1.jpg" style="width:100%" height="900px">
+                <img class="mySlides" src="./images/red_sports_car2.jpg" style="width:100%" height="900px">
+                <img class="mySlides" src="./images/lights.jpg" style="width:100%" height="900px">
         </div>
-        
-        <div>
-            <table>
-                <tr>
-                    <td id="info" width="50%"><p>This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. 
-                        This website provides information about driving schools in your area. </p></td>
-                    <td id="info" width="30%"><img src="https://cdn.pixabay.com/photo/2017/04/06/22/11/auto-2209439_960_720.png" align="center" width="500px" height="500px"></td>
-                    <td id="info" width="20%">
-                        <div id="button1">
-                        <button class="button">
-                            <a href="./driving-schools.html">Find your driving school</a>
-                        </button>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+        <div class="container">
+            <p style="text-align: center; padding:5px;"><img src="./images/logo1 (1).jpg" height="600px" width="400px" class="rotate90"></p>
         </div>
-                
+        <div class="container">
+            <p style="text-align:center; color: white; padding:5px;">
+                Welcome to DriveSmart! Here we give suggestions to your local driving schools. <br>You can customise your search based on your requirement as well! <br>Come enjoy using our interface!
+                <br>Go ahead and click on this button!<br><br>
+                <button class="button">
+                        <a href="./driving-schools.html">Find your driving school</a>
+                </button>
+                <br><br><br><br><br><br><br>
+            </p>
+        </div>
+        <div class="row">
+            <div class="column"></div>
+        </div>
+        <div class="row" id = "bottom">
+            <div class="column">Connect with us on <div class="row"><a href="https://www.facebook.com/"><img src="./images/fb.svg" height="28px" width="28px"></a></div><div class="row"><a href="https://www.twitter.com/"><img src="./images/twitter.svg" height="28px" width="28px"></a></div><div class="row"><a href="https://www.instagram.com/"><img src="./images/ig.png" height="28px" width="28px"></a></div><div class="row"><a href="https://www.linkedin.com/"><img src="./images/linkedin.png" height="28px" width="28px"></a></div></div>
+            <div class="column">Thank you!<div class="row">FAQs</div><div class="row">Research</div><div class="row">APIs</div></div><br><br><br><br><br><br><br><br><br><br>
+        </div>
+        <script>
+            var myIndex = 0;
+            carousel();
+            
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";  
+                }
+                myIndex++;
+                if (myIndex > x.length) {myIndex = 1}    
+                x[myIndex-1].style.display = "block";  
+                setTimeout(carousel, 2000); // Change image every 2 seconds
+            }
+        </script>
+        <script>
+                    var fadeElBottom = $('.fade-scroll-bottom');
+
+                    $(document).on('scroll', function() {
+                        var bottomScollPos = $(document).scrollTop() + $(window).height();
+                                        
+                        fadeElBottom.each(function() {
+                            var elemOffsetTop = $(this).offset().top;
+                            if(bottomScollPos > elemOffsetTop)
+                                $(this).css('opacity', (bottomScollPos-elemOffsetTop-150)/550);
+                        });
+                    });
+        </script>
+       
+        </body>
 
 </html>
