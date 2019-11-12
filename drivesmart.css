@@ -49,3 +49,26 @@ body {
 #navbar li a:hover {
     background-color: black;
 }
+.navbar{
+	overflow: hidden;
+	background-color: #1388a5;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+.navbar a:hover {
+    background-color: black;
+    color: #1388a5;
+}
+
+.navbar a {
+	float: left;
+	display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    margin-bottom: 0px;
+}
