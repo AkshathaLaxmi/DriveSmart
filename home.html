@@ -9,67 +9,71 @@
         <style>
         
         .navbar{
-        	position: fixed;
+            position: fixed;
+            
         }
         body{
             background-color: black;
+            
         }
         
-		#logo img{
-            position:relative;animation:animatetop 1.5s;
-		}
-		@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
 		
-        .blur-img{
-            background: url("./images/lights.jpg");
-			
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: cover;
-            content: "";
-            position: absolute;
-              
-            width : 100%;
-            height: 100%;
-            background: inherit;
-            z-index: -1;
-            
-            filter        : blur(15px);
-            -moz-filter   : blur(15px);
-            -webkit-filter: blur(15px);
-            -o-filter     : blur(15px);
-            
-            transition        : all 2s linear;
-            -moz-transition   : all 2s linear;
-            -webkit-transition: all 2s linear;
-            -o-transition     : all 2s linear;
-            
-        }
+		@keyframes animatetop{from{top:-300vh;opacity:0} to{top:10vh;opacity:1}}
 		#logo{
-			background-image: url("./images/lights.jpg");
-			text-align: center;
-			height: 100%;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: cover;
-			height:640px;
-		}
+            background:url('./images/lights.jpg') no-repeat center;
+            background-size:100%;
+            height: 100vh;
+            top:100%;
+            position: relative;
+        }
+        .blur-img{
+            
+            content: "";
+            
+              position: absolute;
+              
+              width : 100vw;
+              height: 100vh;
+              background: inherit;
+              
+              opacity: 0.1;
+              filter        : blur(10px);
+              -moz-filter   : blur(10px);
+              -webkit-filter: blur(10px);
+              -o-filter     : blur(10px);
+              
+              transition        : all 2s linear;
+              -moz-transition   : all 2s linear;
+              -webkit-transition: all 2s linear;
+              -o-transition     : all 2s linear;
+        }
+        
+		
 		
 		.Centerer{
-	    display: inline-block;
-	    height: 100%;
-	    vertical-align: middle;
+        display: table-cell;
+        position: absolute;
+        height: 50%;
+        width: 50%;
+        margin: auto;
+        overflow: auto;
+        vertical-align: middle;
+        
+        
 		}
 
 		.centered{
-			display: inline-block;
-    		vertical-align: middle;
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            animation:animatetop 2s;
+            
 		}
 		
-		.mySlides img{
-			position:relative;animation:animatetop 10s;
-		}
-		@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+	    
+		.container{
+            height: 100vh;
+        }
 		
         .button{
             background-color: #1388a5;
@@ -79,6 +83,8 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
+            border-radius: 10px;
+
             
         }
 
@@ -105,9 +111,9 @@
         .column {
             padding: 30px;
             float: left;
+            
             width: 33.33%;
-            }
-
+        }
             /* Clear floats after the columns */
         .row:after {
             content: "";
@@ -115,8 +121,14 @@
             clear: both;
         }
         .fade-scroll-bottom{
-        	padding: none;
+            padding: none;
+            z-index: 9999;
         }
+
+        #clickme{
+            cursor: pointer;
+        }
+        
         </style>
         <script>
             $(document).ready(function (){
@@ -153,10 +165,14 @@
         
         <div id="logo" class="container">
                 <div class="blur-img"></div>
-            
-        	<span class="Centerer"></span>
-            <img class="centered" src="./images/logo.png" style="height:150px; width:450px;"></p>
+                  
+                <br><br><br><br><br><br>   <br><br><br><br><br><br><br><br><br><br>
+            <span class="Centerer"></span>
+            <p align="center" id="clickme">
+            <img class="centered" src="./images/onlinelogomaker-111219-2151-6376-500.jpg" style="height:150px; width:450px; opacity: 0.9;"></p>
+            <br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
+ 
         <div class="container-fluid fade-scroll-bottom" style="max-height: 1000px;">
                 <img class="mySlides" src="./images/red_sports_car.jpg" style="width:100%" height="900px">
                 <img class="mySlides" src="./images/red_sports_car1.jpg" style="width:100%" height="900px">
@@ -165,9 +181,9 @@
 
         </div>
         
-        <div class="container">
+        <div class="container" id="welcome">
             <p style="text-align:center; color: white; padding:0px;">
-            	<br><br><br><br><br><br>
+            	<br><br><br><br><br><br><br><br><br><br><br><br>
                 Welcome to DriveSmart! Here we give suggestions to your local driving schools. <br>You can customise your search based on your requirement as well! <br>Come enjoy using our interface!
                 <br>Go ahead and click on this button!<br><br>
                 <button class="button">
@@ -207,12 +223,19 @@
     					$("#div1").fadeTo("slow", 0.15);
     					$("#div2").fadeTo("slow", 0.4);
     					$("#div3").fadeTo("slow", 0.7);
-  });
-});
+                        });
+                    });
+                    $(document).ready(function (){
+                        $("#clickme").click(function(){
+                            $('html, body').animate({
+                                scrollTop: $("#welcome").offset().top
+                            }, 2000);
+                        });
+                    });
         </script>
        
         </body>
 
 </html>
 
-<p style="text-align: center; padding:5px;">
+

@@ -7,6 +7,7 @@
             body{
               background-image: url("./images/night.jpg");
               background-size: cover;
+              z-index: 1;
             }
             * {box-sizing: border-box;}
             .bg-img{
@@ -29,6 +30,21 @@
               -o-transition     : all 2s linear;
               
             }
+            .overall{
+              background: white;
+              width: 400px;
+              height: 300px;
+              top: 50%;
+              left: 50%;
+              position: absolute;
+              transform: translate(-50%, -25%);
+              box-sizing: border-box;
+              padding: 50px 28px;
+              border-radius: 10px;
+              opacity: 0.7;
+              display: block;
+
+            }
             /* Full-width input fields */
             input[type=text], input[type=password] {
               width: 100%;
@@ -49,32 +65,39 @@
             button {
               background-color: #1388a5;
               color: white;
-              padding: 14px 20px;
+              padding: 10px 10px;
               margin: 8px 0;
               border: none;
               cursor: pointer;
               width: 100%;
-              opacity: 0.9;
+              opacity: 0.8;
+              border-radius: 10px;
+              margin: 5px;
             }
             
             button:hover {
-              opacity:1;
+              background-color: blue;;
+              transform: scale(1.1);
             }
             
             /* Extra styles for the cancel button */
             .cancelbtn {
-              padding: 14px 20px;
+              padding: 14px 10px;
+              margin: 10px;
               background-color: #727070;
             }
-            
+            .cancelbtn:hover{
+              background-color: red;
+            }
             .signupbtn, .signinbtn {
-                padding: 14px 20px;
+                padding: 14px 5px;
+                margin: 10px;
                 background-color: #1388a5;
             }
             /* Float cancel and signup buttons and add an equal width */
             .cancelbtn, .signupbtn, .signinbtn {
               float: left;
-              width: 50%;
+              width: 200px;
             }
             
             /* Add padding to container elements */
@@ -142,10 +165,13 @@
             /* Change styles for cancel button and signup button on extra small screens */
             @media screen and (max-width: 300px) {
               .cancelbtn, .signupbtn, .signinbtn {
-                 width: 100%;
+                 width: 100px;
+                 padding: 5px 5px;
+                 margin: 10px;
               }
             }
             </style>
+            </head>
             <body>
               <div class="bg-img"></div>
                     <h1 align="left"><a id ="homelink" href="./home.html">DriveSmart</a></h1>
@@ -160,11 +186,14 @@
             
         		        </div>
             <br><br><br><br><br>
+            
+            <div class="overall" id="over">
             <h2 align="center" style="color: #1388a5;">Sign in or sign up here now!!</h2> 
             <center>
-            <button onclick="document.getElementById('id01').style.display='block'" style="width:90px; height: 55px; padding: 8px; margin-top: auto;"><h3>Sign Up</h3></button>
-            <button onclick="document.getElementById('id02').style.display='block'" style="width:90px; height: 55px; padding: 8px; margin-top: auto;"><h3>Sign in</h3></button>
+            <button onclick="document.getElementById('id01').style.display='block'" style="width:90px; height: 55px; padding: 6px;  margin: 10px"><h3>Sign Up</h3></button> 
+            <button onclick="document.getElementById('id02').style.display='block'" style="width:90px; height: 55px; padding: 6px;  margin: 10px;"><h3>Sign in</h3></button>
             </center>
+          </div>
             <div id="id01" class="modal">
               <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
               <form class="modal-content" method="POST">
@@ -227,11 +256,13 @@
                       </div>
                     </form>
                   </div>
+               
               
             <script>
             // Get the modal
             var modal = document.getElementById('id01');
             var model = document.getElementById('id02');
+            var overall = document.getElementById('over');
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function(event) {
               if (event.target == modal) {
@@ -240,6 +271,7 @@
               else if(event.target==model) {
                   model.style.display = "none";
               }
+              overall.style.display = 'block';
             }
             function change() {
                 if(modal.style.display=='block') {
@@ -250,6 +282,8 @@
                     model.style.display = "none";
                     modal.style.display = "block";
                 }
+                overall.style.display = 'none';
+                
             }
             function JSalert(e) {
               alert("Congrats! Your account is created. success");

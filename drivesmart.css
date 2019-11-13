@@ -1,4 +1,5 @@
 body {
+    font-family: Georgia, serif;
     background-color: black;
     margin:0;
 }
@@ -6,12 +7,7 @@ body {
     color: #1388a5;
 }
 #sign :hover{
-<<<<<<< HEAD
     color: #f5f6f7;
-=======
-    color: #26c3eb;
-
->>>>>>> 7f791f455db9e35fdddb4471abafff5ac91cfdcd
 }
 
 #sign :visited{
@@ -21,6 +17,12 @@ body {
 #homelink{
     text-decoration: none;
     color: #2c8cdb;
+    padding: 10px;
+    margin:10px;
+}
+
+#homelink:hover{
+    transform: scale(1.1);
 }
 
 #head{
