@@ -17,6 +17,7 @@
         }
         .button:hover{
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            transform: scale(1.1);
         }
 
         input[type=text], .select {
@@ -26,23 +27,27 @@
           margin-right: 100px;
           display: inline-block;
           border: 1px solid #ccc;
-          border-radius: 4px;
+          border-radius: 10px;
           box-sizing: border-box;
         }
 
         input[type=submit] {
           width: 15%;
-          background-color: #4CAF50;
+          background-color: rgb(76, 152, 175);
           color: white;
           padding: 14px 20px;
           margin: 8px 0;
           margin-left: 100px;
           border: 100px;
-          border-radius: 4px;
+          border-radius: 13px;
           cursor: pointer;
+          opacity: 0.8;
         }
 
-        
+        input[type=submit]:hover{
+          transform: scale(1.1);
+          opacity: 1;
+        }
 
         .button a{
             text-decoration: none;
