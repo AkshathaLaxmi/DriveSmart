@@ -18,11 +18,11 @@ body {
     text-decoration: none;
     color: #2c8cdb;
     padding: 10px;
-    margin:10px;
+    margin:20px;
 }
 
-#homelink:hover{
-    transform: scale(1.1);
+.homelink:hover{
+    transform: translate(60px, 0px) scale(1.08);
 }
 
 #head{

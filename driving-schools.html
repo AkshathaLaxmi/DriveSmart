@@ -3,7 +3,11 @@
 <html>
     <head>
         <title>DriveSmart</title>
-        <link rel = "stylesheet" href="./drivesmart.css">
+        <link rel = "stylesheet" href="./drivesmart.css"/>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
         <style>
         
         .button{
@@ -70,18 +74,21 @@
             text-decoration: none;
             color: white;
         }
-
+        
+        #map {
+          width: 60%;
+          margin: 0 auto;
+          height: 600px;
+          background-color: grey;
+        }
         </style>
+        
     </head>
     <body>
-      <div>
-        <table>
-          <tr>
-            <td>
+      <div class="homelink">
+        
               <h1 align="left"><a id ="homelink" href="./home.html">DriveSmart</a></h1>
-            </td>
-            </tr>
-          </table>
+           
         </div>
 
         <div class="navbar">
@@ -96,21 +103,131 @@
         </div>
 
         <div class="div1">
-            <form action="results.html">
+            <form action="results.html" method = "POST">
             <label for="location"></label>
-            <input type="text" id="location" name="location" placeholder="Your location..">
+            <input type="text" id="location" name="location" placeholder="Your location...">
 
-            <label for="vehicle">Vehicle type: </label>
+            <!-- <label for="vehicle">Vehicle type: </label>
             <select id="Vehicle" name="vehicle">
               <option value="2-Wheeler">2-Wheeler</option>
               <option value="4-Wheeler">4-Wheeler</option>
               <option value="both">Both</option>
-            </select>
+            </select> -->
 
-            <input type="Submit" value="Submit">
+            <input type="Submit" value="Search" id = "submit">
             </form>
             </div>
+            <div id='map'></div>
+          <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+          <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+          
+          <script>
 
-        <img src="https://live.staticflickr.com/3803/10012162166_cde34d427e_b.jpg" alt="Image of World Map" class="center">
+            var maps = document.getElementById("map");
+            maps.addEventListener("click", NavigationOn, false);
 
+            function showLocation(position){
+              var inputs = document.getElementById("location");
+              inputs.value = position.coords.latitude + " " + position.coords.longitude;
+            }
+            function NavigationOn(){
+              if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showLocation);
+              }
+              else{
+                alert("Enter location!");
+              }
+            }
+            
+            mapboxgl.accessToken = 'pk.eyJ1IjoiYWtzaGF0aGFsYXhtaSIsImEiOiJjazM1ZDNnOHIxZGY1M2hwYnhlODFzdncyIn0.gotdzFSsNUvhJ55z_6yJNQ';
+            var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v10',
+            center: [77.5345, 18.9345], // starting position
+            zoom: 4
+            });
+
+            map.addControl(new mapboxgl.GeolocateControl({
+            positionOptions: {
+            enableHighAccuracy: true
+            },
+            trackUserLocation: true
+            }));
+            
+
+            // var banashankari = {area: "Banashankari", coords: {latitude: 12.925453, longitude: 77.546761}};
+            // banashankari = JSON.stringify(banashankari);
+            
+            // var yeshwanthpur = {area: "Yeshwanthpur", coords: {latitude: 13.027966, longitude: 77.540916}};
+            // yeshwanthpur = JSON.stringify(yeshwanthpur);
+
+            // var jayanagar = {area: "Jayanagar", coords: {latitude: 12.9296, longitude: 77.5801}};
+            // jayanagar = JSON.stringify(jayanagar);
+
+            // var yelahanka = {area: "Yelahanka", coords: {latitude: 13.135, longitude: 77.5891}};
+            // yelahanka = JSON.stringify(yelahanka);
+
+            // var whitefield = {area: "Whitefield", coords: {latitude: 12.969, longitude: 77.7509}};
+            // whitefield = JSON.stringify(whitefield);
+
+            // var indiranagar = {area: "Indiranagar", coords: {latitude: 12.9719, longitude: 77.6412}};
+            // indiranagar = JSON.stringify(indiranagar);
+
+            $(function() {
+              var availableAreas = ["Banashankari", "Yeshwanthpur", "Jayanagar", "Yelahanka", "Whitefield", "Indiranagar"];
+              $("#location").autocomplete({
+                source: availableAreas
+              });
+            });
+
+
+            var submit = document.getElementById("submit");
+            submit.addEventListener("click", function () {
+              var location = document.getElementById("location").value;
+              localStorage.setItem("area", location);
+            }, false);
+            
+            // var schools = {
+            //   place1: {name: "Lotus Driving School", coords: {lat: 12.9192, long: 77.56132}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving1.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759384},
+            //   place2: {name: "Rose Driving School", coords: {lat: 12.8813, long: 77.6102}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving2.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759484},
+            //   place3: {name: "Tulip Driving School", coords: {lat: 12.7643, long: 77.56066}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving3.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9948751384},
+            //   place4: {name: "Lily Driving School", coords: {lat: 12.333, long: 77.56995}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving4.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9938759384},
+            //   place5: {name: "Swift Driving School", coords: {lat: 12.5090, long: 77.4934}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving5.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9248759384},
+            //   place6: {name: "Mercedes Driving School", coords: {lat: 13.1967, long: 77.5934}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving6.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 8948759384},
+            //   place7: {name: "Maruti Driving School", coords: {lat: 12.9669, long: 77.6433}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving7.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9943759384},
+            //   place8: {name: "Honda Driving School", coords: {lat: 12.95696, long: 77.756}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving8.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948459384},
+            //   place9: {name: "BMW Driving School", coords: {lat: 12.97989, long: 77.7123}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving9.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948755384},
+            //   place10: {name: "Jaguar Driving School", coords: {lat: 12.8431, long: 77.59932}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving10.jpg", time: {morning: true, afternoon: true, night: true}, license: true, phone: 9928759384},
+            //   place11: {name: "Cheetah Driving School", coords: {lat: 12.9633, long: 77.6234}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving1.jpg", time: {morning: true, afternoon: true, night: false}, license: false, phone: 9148759384},
+            //   place12: {name: "Tiger Driving School", coords: {lat: 12.9344, long: 77.5783}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving2.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9944759384},
+            //   place13: {name: "Lion Driving School", coords: {lat: 13.0329, long: 77.54201}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving3.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948559384},
+            //   place14: {name: "Leopard Driving School", coords: {lat: 12.9992, long: 77.6434}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving4.jpg", time: {morning: true, afternoon: true, night: true}, license: true, phone: 9548759384},
+            //   place15: {name: "Fox Driving School", coords: {lat: 13.1192, long: 77.590125}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving5.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948749384},
+            //   place16: {name: "Earth Driving School", coords: {lat: 12.96782, long: 77.750766}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving6.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9946759384},
+            //   place17: {name: "Wind Driving School", coords: {lat: 12.8592, long: 77.60012}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving7.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948459384},
+            //   place18: {name: "Fire Driving School", coords: {lat: 12.95869, long: 77.69935}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving8.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948859384},
+            //   place19: {name: "Water Driving School", coords: {lat: 12.9704, long: 77.69043}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving9.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9945759384},
+            //   place20: {name: "Summer Driving School", coords: {lat: 12.927020, long: 77.546652}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving10.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9998759384},
+            //   place21: {name: "Winter Driving School", coords: {lat: 12.8990, long: 77.5873}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving1.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9918759384},
+            //   place22: {name: "Autumn Driving School", coords: {lat: 12.92103, long: 77.57576}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving2.jpg", time: {morning: true, afternoon: true, night: true}, license: false, phone: 9908759384},
+            //   place23: {name: "Spring Driving School", coords: {lat: 12.97923, long: 77.6534}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving3.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9950759384},
+            //   place24: {name: "Gears Driving School", coords: {lat: 13.14094001, long: 77.590235}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving4.jpg", time: {morning: true, afternoon: true, night: true}, license: true, phone: 7948759384},
+            //   place25: {name: "Levers Driving School", coords: {lat: 13.14606028, long: 77.584354}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving5.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948759004},
+            //   place26: {name: "Level Driving School", coords: {lat: 12.942045, long: 77.62468}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving6.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759380},
+            //   place27: {name: "Traversal Driving School", coords: {lat: 13.0007959, long: 77.590395}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving7.jpg", time: {morning: true, afternoon: true, night: true}, license: false, phone: 9948759381},
+            //   place28: {name: "Breadth Driving School", coords: {lat: 12.927506, long: 77.575432}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving8.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759324},
+            //   place29: {name: "Depth Driving School", coords: {lat: 12.806769192, long: 77.577738}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving9.jpg", time: {morning: true, afternoon: true, night: true}, license: true, phone: 9948759382},
+            //   place30: {name: "Technology Driving School", coords: {lat: 12.9676192, long: 77.748604}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving10.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948757384},
+            //   place31: {name: "New Driving School", coords: {lat: 12.860876087, long: 77.589486}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving1.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948759383},
+            //   place32: {name: "Trendy Driving School", coords: {lat: 12.780992, long: 77.640385}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving2.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759374},
+            //   place33: {name: "Smart Driving School", coords: {lat: 12.889098859, long: 77.563563}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving3.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9948751384},
+            //   place34: {name: "Genius Driving School", coords: {lat: 12.91008956, long: 77.56093759}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving4.jpg", time: {morning: true, afternoon: true, night: true}, license: false, phone: 9948750384},
+            //   place35: {name: "King Driving School", coords: {lat: 12.86078554, long: 77.5794732}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving5.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759385},
+            //   place36: {name: "Queen Driving School", coords: {lat: 12.87650780, long: 77.653593}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving6.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9948759084}
+              
+            // }
+
+          </script>
+
+         
 </html>
