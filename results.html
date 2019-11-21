@@ -8,6 +8,11 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
         <style>
+
+          body{
+            background: black;
+          }
+        
         .navbar{
             overflow: hidden;
             background-color: #1388a5;
@@ -71,6 +76,7 @@
           padding: 10px;
           float: left;
           color: white;
+          position: absolute;
         }
         .left {
           display: block;
@@ -105,6 +111,23 @@
             text-decoration: none;
             color: black;
         }
+
+        .driving_school{
+          background: rgb(144, 168, 221);
+          margin-left: 400px;
+          padding: 10px 50px 10px 50px;
+          margin-right: 20px;
+        }
+
+        .driving_school:hover{
+          transform: scale(1.1);
+          background: rgb(179, 202, 245);
+        }
+
+        .gap{
+          background: black;
+          height: 15px;
+        }
         </style>
     </head>
     <body>
@@ -112,7 +135,7 @@
 
         <div class="navbar">
             
-            <a href="./home.html">Home</a>
+            <a href="./index.html">Home</a>
             <a href="./driving-schools.html">Driving Schools</a>
             <a href="./driving-instructions.html">Driving Instructions</a>       
             <a href="./rto-info.html">RTO Information</a>
@@ -121,11 +144,11 @@
       </div>
       <br><br>
       <div class="homelink">
-          <h1 align="left"><a id ="homelink" href="./home.html">DriveSmart</a></h1>
+          <h1 align="left"><a id ="homelink" href="./index.html">DriveSmart</a></h1>
       </div>
 
         <div class="div1">
-            <form action="/action_page.php" method = "POST">
+            <form action="./results.html" method = "POST">
             <label for="location"></label>
             <input type="text" id="loc" name="location" placeholder="Your location...">
 
@@ -136,17 +159,18 @@
               <option value="Both">Both</option>
             </select> -->
 
-            <button class="button">
+            <button class="button" id="sub">
                 <a href="./results.html">Submit</a>
             </button>
             </form>
       </div>
+      <br><br><br>
 
-      <div id="results"></div>
+      <div id="result"></div>
 
-      <div class="div2">
+      <!-- <div class="div2 col-md-3">
             <h3> Filters: </h3>
-            <form action="/action_page.php" method="get">
+            <form action="./results.html" method="POST">
             <h4> Based on time of the day </h4>
             <input type="checkbox" name="filter" value="morning"> Morning &nbsp &nbsp
             <input type="checkbox" name="filter" value="evening"> Evening &nbsp &nbsp
@@ -165,7 +189,7 @@
                 <a href="./results.html">Submit</a>
             </button>
           </form>
-      </div>
+      </div> -->
  
   <script>
   
@@ -175,6 +199,12 @@
             function hasNumber(myString) {
               return /\d/.test(myString);
             }
+
+            var loc = document.getElementById("loc");
+            var submit = document.getElementById("sub");
+            submit.addEventListener("click", function (){
+              localStorage.setItem("area", loc.value);
+            }, false)
 
             function distance(lat1, lon1, lat2, lon2, unit) {
               var get_dist = new XMLHttpRequest();  
@@ -189,27 +219,11 @@
 
             
 
-            var banashankari = {area: "Banashankari", latitude: 12.925453, longitude: 77.546761};
-            banashankari = JSON.stringify(banashankari);
             
-            var yeshwanthpur = {area: "Yeshwanthpur", latitude: 13.027966, longitude: 77.540916};
-            yeshwanthpur = JSON.stringify(yeshwanthpur);
-
-            var jayanagar = {area: "Jayanagar", latitude: 12.9296, longitude: 77.5801};
-            jayanagar = JSON.stringify(jayanagar);
-
-            var yelahanka = {area: "Yelahanka", latitude: 13.135, longitude: 77.5891};
-            yelahanka = JSON.stringify(yelahanka);
-
-            var whitefield = {area: "Whitefield", latitude: 12.969, longitude: 77.7509};
-            whitefield = JSON.stringify(whitefield);
-
-            var indiranagar = {area: "Indiranagar", latitude: 12.9719, longitude: 77.6412};
-            indiranagar = JSON.stringify(indiranagar);
 
             $(function() {
-              var availableAreas = ["Banashankari", "Bannerghatta", "Jayanagar", "Yelahanka", "Whitefield", "Indiranagar"];
-              $("#location").autocomplete({
+              var availableAreas = ["Banashankari", "Koramangala", "Bannerghatta", "Jayanagar", "Hebbal", "Yelahanka", "Whitefield", "Indiranagar"];
+              $("#loc").autocomplete({
                 source: availableAreas
               });
             });
@@ -269,35 +283,158 @@
               for(var i = 0 ; i < values.length ; i++) {
                   coords.push(Object.values(Object.values(values[i])[1]));
               }
-              console.log(coords);
+              //console.log(coords);
               var temp1, temp2;
               //asc_schools[0] = names[0];
-              for(var i = 1 ; i < coords.length ; i++) {
+              for(var i = 0 ; i < coords.length ; i++) {
                   dist = distance(lat1, lon1, coords[i][0], coords[i][1]);
                   distances.push(dist);
               }
-              for(var i = 0; i<names.length; i++)
-                for(var j = 0; j<names.length-i-1; j++)
+              for(var i = 0; i<values.length; i++)
+                for(var j = 0; j<values.length-i-1; j++)
                 {
                   if(distances[j]>distances[j+1])
                   {
                     temp1 = distances[j];
                     distances[j] = distances[j+1];
                     distances[j+1] = temp1;
-                    temp2 = names[j];
-                    names[j] = names[j+1];
-                    names[j+1] = temp2;
+                    temp2 = values[j];
+                    values[j] = values[j+1];
+                    values[j+1] = temp2;
+                    
                   }
                 }
-              return names;
+              return values;
           }
 
           if(hasNumber(area))
             {
               var coords = area.split(" ");
-              var names = get_nearest_group(coords);
-
+              var result = get_nearest_group(coords);
+              
             }
+            else {
+              var url = "https://eu1.locationiq.com/v1/search.php?key=6ac07da31cfefe&q=" + area + "%20Bengaluru&format=json";
+              var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": url,
+                "method": "GET"
+              }
+
+              $.ajax(settings).done(function (response) {
+                var coords = [];
+                var v = Object.values(response);
+                var u = v[0];
+                coords[0] = u["lat"];
+                coords[1] = u["lon"];
+                var result = get_nearest_group(coords);
+                console.log(result[0]);
+                
+              })
+            }
+
+            var main = document.getElementById("result");
+            var br = document.createElement("br");
+            for(var i = 0 ; i < Object.values(schools).length ; i++) {
+              //console.log("lol");
+              var div = document.createElement("div");
+              div.setAttribute("class","driving_school");
+
+              var p = document.createElement("h3");
+              p.class = "name";
+              p.innerHTML = "Name: " + Object.values(result)[i].name;
+
+              div.appendChild(br);
+              div.appendChild(p);
+              div.appendChild(br);
+
+              var img = document.createElement("img");
+
+              img.src = Object.values(result)[i].picture;
+              img.alt = "school";
+              img.style = "width:20%";
+              div.appendChild(br);
+              div.appendChild(img);
+              div.appendChild(br);
+
+              var dis = document.createElement("p");
+              dis.class = "distance";
+              var coo = Object.values(result)[i].coords;
+              //console.log(Object.values(result)[i].phone.type);
+              dis.innerHTML = "Latitude: " + String(coo["lat"]) + "<br><br> Longitude: " + String(coo["long"]);
+              div.appendChild(br);
+              div.appendChild(dis);
+              div.appendChild(br);
+
+              var phone = document.createElement("p");
+              phone.class = "phone";
+              console.log(Object.values(result)[i].phone.type);
+              phone.innerHTML = "Phone number: " + String(Object.values(result)[i].phone);
+              div.appendChild(br);
+              div.appendChild(phone);
+              div.appendChild(br);
+
+              var mode = document.createElement("p");
+              mode.class = "mode";
+
+              if(Object.values(result)[i].mode_taught.two && Object.values(result)[i].mode_taught.four) {
+                  mode.innerHTML = "Modes taught: 2 wheeler and 4 wheeler";
+              } else if(Object.values(result)[i].mode_taught.two) {
+                  mode.innerHTML = "Modes taught: 2 wheeler";
+              } else if(Object.values(result)[i].mode_taught.four) {
+                  mode.innerHTML = "Modes taught: 4 wheeler";
+              }
+              div.appendChild(br);
+              div.appendChild(mode);
+              div.appendChild(br);
+
+              var lady_teach = document.createElement("p");
+              lady_teach.class = "lady_teacher";
+
+              if(Object.values(result)[i].lady_teacher) {
+                  lady_teach.innerHTML = "Female teachers available";
+              } else {
+                  lady_teach.innerHTML = "Female teachers not available";
+              }
+
+              div.appendChild(br);
+              div.appendChild(lady_teach);
+              div.appendChild(br);
+
+              var time = document.createElement("p");
+              time.class = "time";
+              var time_string = "";
+              for(var j=0;j<Object.values(Object.values(result)[i].time).length;j++) {
+                  if(Object.values(Object.values(result)[i].time)[j]) {
+                      time_string += String(Object.keys(Object.values(result)[i].time)[j]);
+                      time_string += " ";
+                  }
+              }
+              time.innerHTML = "Open during: " + time_string;
+
+              div.appendChild(br);
+              div.appendChild(time);
+              div.appendChild(br);
+
+              var license = document.createElement("p");
+              license.class = "license";
+
+              if(Object.values(result)[i].license) {
+                  license.innerHTML = "Licensing available";
+              } else {
+                  license.innerHTML = "Licensing not available";
+              }
+
+              div.appendChild(br);
+
+              main.appendChild(div);
+              
+              var space = document.createElement("div");
+              space.setAttribute("class", "gap");
+              main.appendChild(space);
+
+          }
   </script>
 </body>
 </html>

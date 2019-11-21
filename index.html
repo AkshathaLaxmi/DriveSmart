@@ -2,7 +2,9 @@
 <html>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel = "stylesheet" href="./drivesmart.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <head>
         <title>DriveSmart</title>
         <link rel = "stylesheet" href="./drivesmart.css">
@@ -26,7 +28,7 @@
             top:100%;
             position: relative;
         }
-        .blur-img{
+        /* .blur-img{
             
             content: "";
             
@@ -46,15 +48,15 @@
               -moz-transition   : all 2s linear;
               -webkit-transition: all 2s linear;
               -o-transition     : all 2s linear;
-        }
+        } */
         
 		
 		
 		.Centerer{
         display: table-cell;
         position: absolute;
-        height: 50%;
-        width: 50%;
+        height: 100%;
+        width: 100%;
         margin: auto;
         overflow: auto;
         vertical-align: middle;
@@ -77,7 +79,7 @@
             height: 100vh;
         }
 		
-        .button{
+        .button1{
             background-color: #1388a5;
             border: none;
             padding: 15px 32px;
@@ -90,13 +92,13 @@
             
         }
 
-        .button:hover{
+        .button1:hover{
             cursor: pointer;
             background-color: rgba(38, 100, 194, 0.993);
             transform: scale(1.1);
         }
 
-        .button a{
+        .button1 a{
             text-decoration: none;
             color: black;
         }
@@ -154,10 +156,10 @@
     </head>
     <body>
     
-        
-        <div class="navbar">
+        <div class="row">
+        <div class="navbar col-lg-12">
             
-                <a href="./home.html">Home</a>
+                <a href="./index.html">Home</a>
                 <a href="./driving-schools.html">Driving Schools</a>
                 <a href="./driving-instructions.html">Driving Instructions</a>       
                 <a href="./rto-info.html">RTO Information</a>
@@ -165,8 +167,9 @@
                 <a href="./signin.html">SIGN IN | SIGN UP</a>
             
         </div>
-        
-        <div id="logo" class="container">
+    </div>
+        <div id="logo" class="row">
+            <div class="col-md-12">
                 <div class="blur-img"></div>
                   
                 <br><br><br><br><br><br>   <br><br><br><br><br><br><br><br><br><br>
@@ -175,26 +178,37 @@
             <img class="centered" src="./images/onlinelogomaker-111219-2151-6376-500.jpg" style="height:150px; width:450px; opacity: 0.9;"></p>
             <br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
- 
-        <div class="container-fluid fade-scroll-bottom" style="max-height: 1000px;">
-                <img class="mySlides" src="./images/red_sports_car.jpg" style="width:100%" height="900px">
-                <img class="mySlides" src="./images/red_sports_car1.jpg" style="width:100%" height="900px">
-                <img class="mySlides" src="./images/red_sports_car2.jpg" style="width:100%" height="900px">
+    </div>
+        <div id="my-carousel" class="carousel slide row" data-ride="carousel">
+            <div class="fade-scroll-bottom carousel-inner" style="max-height: 1000px;">
+                    <img class="mySlides" src="./images/red_sports_car.jpg" style="width:100%" height="900px">
+                    <img class="mySlides" src="./images/red_sports_car1.jpg" style="width:100%" height="900px">
+                    <img class="mySlides" src="./images/red_sports_car2.jpg" style="width:100%" height="900px">
+            </div>
         </div>
-
         </div>
+        <!-- <div class="jumbotron text-center" style="background: black;"></div> -->
         
-        <div class="container" id="welcome">
+        <div class="row" id="welcome" style="background: black; height: 100vh;">
+                <div class="jumbotron text-center" style="background: black;"></div>
+                <div class="jumbotron text-center" style="background: black;"></div>
+                <div class="jumbotron text-center" style="background: black;"></div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+
             <p style="text-align:center; color: white; padding:0px;">
-            	<br><br><br><br><br><br><br><br><br><br><br><br>
+            	
                 Welcome to DriveSmart! Here we give suggestions to your local driving schools. <br>You can customise your search based on your requirement as well! <br>Come enjoy using our interface!
                 <br>Go ahead and click on this button!<br><br>
                 <a href="./driving-schools.html">
-                <button class="button">
+                <button class="button1" style="color: black;">
                         Find your driving school
                 </button></a>
-                <br><br><br><br><br><br>
+
             </p>
+            </div>
+            <div class="col-sm-4"></div>
+
         </div>
         <div class="row">
             <div class="column"></div>
