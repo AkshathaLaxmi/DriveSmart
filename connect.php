@@ -1,41 +1,83 @@
 <?php
-$username = $_POST("username");
-$password = $_POST("password");
-$email = $_POST("email");
-if(!empty($username) || !empty($password) || !empty($email)) {
-    
-    $host = "localhost";
-    $dbusername = "root";
-    $dbpassword = "akshatha12345";
-    $dbname = "drivesmart";
-    $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
-
-    if(mysqli_connect_error()){
-        die("Connect error (". mysqli_connect_errno() .")". mysqli_connect_error());
-    }
-    else{
-        $SELECT = "SELECT email From drivesmart1 Where email = ? Limit 1";
-        $INSERT = "INSERT Into drivesmart1 (username, password, email) values(?, ?, ?)";
-        $stmt = $conn->prepare($SELECT);
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $stmt->bind_result($email);
-        $stmt->store_result();
-        $rnum = $stmt->num_rows;
-        if ($rnum==0) {
-            $stmt->close();
-            $stmt = $conn->prepare($INSERT);
-            $stmt->bind_param("ssssii", $username, $password, $gender, $email, $phoneCode, $phone);
-            $stmt->execute();
-            echo "New record inserted sucessfully";
-            } else {
-            echo "Someone already register using this email";
-            }
-            $stmt->close();
-            $conn->close();
-    }
-} else {
-        echo "All field are required";
-        die();
-}
+	$password = $checkpass = $username = $email ="";
+	session_start();
+	$errors = array();
+	$db = mysqli_connect("localhost", 'root','',"drivesmart");
+    if(isset($_POST['signup'])){
+		$checkpass = $_POST["psw-repeat"];
+		if (empty($_POST["username"])) { 
+			array_push($errors, "Name is required");
+  		} else {
+    		$username = mysqli_real_escape_string($db,$_POST["username"]);
+  		}
+  		
+  		if (empty($_POST["email"])) {
+  			
+    		array_push($errors, "Email is required");
+  		} else {
+    		$email = mysqli_real_escape_string($db, $_POST["email"]);
+    		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      			array_push( $errors, "Invalid email format");			
+    		}
+  		}
+  		
+  		if (empty($_POST["password"])) {
+  			array_push($errors, "Password is required"); 	
+  		} else {
+  			$password = mysqli_real_escape_string($db, $_POST["password"]);
+  		}
+  		if ($password != $checkpass) {
+			array_push( $errors, "The two passwords do not match");
+			
+  		}
+  		$user_check_query = "SELECT * FROM accounts WHERE username='$username' OR email='$email' LIMIT 1";
+	  	$result = mysqli_query($db, $user_check_query);
+	  	$user = mysqli_fetch_assoc($result);
+	  	if ($user) { // if user exists
+			if ($user['username'] === $username) {
+				array_push($errors, "Username already exists");
+			}
+			if ($user['email'] === $email) {
+		 			array_push($errors, "email already exists");
+			}
+	  	}
+  		if (count($errors) == 0){
+  			$hash_password = password_hash($password, PASSWORD_DEFAULT);
+  			$insert = "INSERT INTO accounts (username, password, email) VALUES ('$username', '$hash_password', '$email')";
+        	//$SELECT = "SELECT email From drivesmart1 Where email = ? Limit 1";
+        	mysqli_query($db, $insert);
+        	$_SESSION['username'] = $username;
+  			$_SESSION['success'] = "You are now logged in";
+  			header("location: profile_page.php	");
+  		}
+	}
+	if(isset($_POST['signin'])){
+		$errors = array();
+		$name = mysqli_real_escape_string($db,$_POST["username"]);
+		$psw = mysqli_real_escape_string($db, $_POST["password"]);
+		if (empty($name)) {
+  			array_push($errors, "Username is required");
+  		}
+  		if (empty($psw)) {
+  			array_push($errors, "Password is required");
+  		}
+  		if (count($errors) == 0){
+  			$hash_password = password_hash($psw, PASSWORD_DEFAULT);
+  			$query = "SELECT * FROM accounts WHERE username='$name'";
+  			$results = mysqli_query($db, $query);
+			if (mysqli_num_rows($results) == 1) {
+  				array_push($errors, "Matched");
+				$row = mysqli_fetch_assoc($results);
+				if (password_verify($psw, $row['password'])){
+					$_SESSION['username'] = $name;
+	  	  			$_SESSION['success'] = "You are now logged in";
+	  	  			header('location: profile_page.php');
+	  	  		} 
+	  	  	}
+	  	  	else {
+  				array_push($errors, "Wrong username/password combination");
+  			}
+  			
+  		}
+  	}	
 ?>
