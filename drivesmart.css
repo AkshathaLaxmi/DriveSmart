@@ -1,20 +1,28 @@
 body {
-    background-image: radial-gradient(#c9eef5, #5ecbfd);
+    font-family: Georgia, serif;
+    background-color: black;
+    margin:0;
 }
 #sign {
-    color: #041d22;
+    color: #1388a5;
 }
 #sign :hover{
-    color: #1388a5;
+    color: #f5f6f7;
 }
 
 #sign :visited{
-    color: black;
+    color: white;
 }
 
 #homelink{
     text-decoration: none;
-    color: #1c267e;
+    color: #2c8cdb;
+    padding: 10px;
+    margin:20px;
+}
+
+.homelink:hover{
+    transform: translate(60px, 0px) scale(1.08);
 }
 
 #head{
@@ -26,7 +34,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #1c267e;
+    background-color: #1388a5;
 }
 
 #navbar li {
@@ -44,25 +52,32 @@ body {
 #navbar li a:hover {
     background-color: black;
 }
-
-
-#main{
-	float:left;
-	width:68%;
-	margin: 0;
-	padding:0;
-	box-sizing: border-box;
-
+.navbar{
+	overflow: hidden;
+	background-color: #1388a5;
+	top: 0;
+	width: 100%;
+	z-index: 1;
 }
 
-#side{
-	float:left;
-	width:30%;
-	margin:0;
-	padding:0;
-	box-sizing: border-box;
+.navbar a:hover {
+    background-color: black;
+    color: #1388a5;
 }
 
-ul#list {
-  list-style-type: circle;
+.navbar a {
+	float: left;
+	display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    margin-bottom: 0px;
 }
+
+footer{
+            color: white;
+            position: fixed;
+            bottom: 20px;
+        }
