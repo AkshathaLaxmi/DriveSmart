@@ -1,116 +1,555 @@
-<?php 
-  session_start();
-  if (!isset($_SESSION['username'])) {
-  	$_SESSION['msg'] = "You must log in first";
-  	header('location: signin.php');
-  }
-  if (isset($_GET['logout'])) {
-  	session_destroy();
-  	unset($_SESSION['username']);
-  	header("location: signin.php");
-  }
-?>
+<!--Profile, Results Page, Enter Location page-->
+<!DOCTYPE html>
 <html>
     <head>
         <title>DriveSmart</title>
         <link rel = "stylesheet" href="./drivesmart.css">
-		<style type="text/css">
-        i{
-		  background: #c1c8e4;
-		  border-radius: 20px;
-		  font-size: 25px;
-		  text-align: center;
-		  margin-right: 10px;
-		  border-radius:50%;
-		  display:inline-block;
-		  padding:10px;
-		}
-		img {
- 			 display:block;
-		}
-		#ProfilePage
-		{
-    		/* Move it off the top of the page, then centre it horizontally */
-    		margin: 20px auto;
-    		width: 80%;
-    		height:80%;
-    		padding:10px;
-    		background-color:#5ab9ea;
-		}
-		#LeftCol
-		{
-    		/* Move it to the left */
-    		float: left;
-		    width: 250px;
-		    margin:25px 20px;
-    		text-align: center;
-    		padding: 0 0 100 0px;
-		}
-		#Info
-		{
-    		width: 600px;
-			margin-left:80px;
-    		/* Move it to the right */
-		    float: left;
-		}
-		#name{
-			font-size:20px;
-		}
-		#Info{
-			font-family:"Lucida Console","Georgia";
-		}
-		#align{
-			float:right;
-		}
-		</style>
-		</head>
-    <body>
-    	<h1 align="left"><a id ="homelink" href="./home.html">DriveSmart</a></h1>
-                    <div class="navbar">
-            
-                		<a href="./index.html">Home</a>
-                		<a href="./driving-schools.html">Driving Schools</a>
-                		<a href="./driving-instructions.html">Driving Instructions</a>       
-                		<a href="./rto-info.html">RTO Information</a>
-                		<a href="./contact-us.html">Contact Us</a>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        <style>
 
-        		        </div>
-		
-        <p align="right"><a id="edit" href="./edit.html">EDIT</a></p>
-		<section id="Profilepage">
-			<?php if (isset($_SESSION['success'])) : ?>
-      		<div class="error success" >
-      			<h3>
-          		<?php 
-          			echo $_SESSION['success']; 
-          			unset($_SESSION['success']);
-          		?>
-      			</h3>
-      		</div>
-      		<?php endif ?>
-      		<?php  if (isset($_SESSION['username'])) : ?>
-      		    <br>
-    			<p class = "align">Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
-    			<p class = "align" style = "text-align: right;"> <a href="profile_page.php?logout='1'" style="color: red;">logout</a> </p>
-    			
-    		<?php endif ?>
-			<div id="LeftCol">
-				<i><img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg" align="center" width="200px" height="200px"></i>
-			</div>
-			<?php
-      		    $db = new mysqli("localhost","id11628252_drivesmart", "drivesmart", "id11628252_drivesmart");
-      		    if (mysqli_connect_errno()) {
-                die("Connection failed: " . $db->connect_error);
+          body{
+            background: black;
+          }
+        
+        .navbar{
+            overflow: hidden;
+            background-color: #1388a5;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background-color: black;
+            color: #1388a5;
+        }
+        .button{
+            background-color: #3197c7;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .button:hover{
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            background-color: white;
+        }
+        input[type=text], .select {
+          width: 50%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          margin-right: 100px;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        
+        
+        .div1 {
+          margin: 25px;
+          background-color: #112D32;
+          padding: 10px;
+          color: white;
+        }
+        .div2 {
+          width: 20%;
+          height: 450px;
+          margin: 25px;
+          background-color: #112D32;
+          padding: 10px;
+          float: left;
+          color: white;
+          position: sticky;
+          top: 250px;
+        }
+        .left {
+          display: block;
+          align: left;
+          width: 20%;
+          height: 125px;
+        }
+        .div3 {
+          width: 70%;
+          height: 400px;
+          margin: 25px;
+          float: right;
+          color: white;
+        }
+        #button1 a{
+            text-decoration: none;
+            color: white;
+        }
+        .button{
+            background-color: #3197c7;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .button:hover{
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+        .button a{
+            text-decoration: none;
+            color: black;
+        }
+
+        .driving_school{
+          background: rgb(144, 168, 221);
+          margin-left: 500px;
+          padding: 10px 50px 10px 50px;
+          margin-right: 20px;
+          
+
+        }
+
+        .driving_school:hover{
+          transform: scale(1.1);
+          background: rgb(179, 202, 245);
+        }
+
+        .gap{
+          background: black;
+          height: 15px;
+        }
+        a{
+          text-decoration: none;
+          color: black;
+        }
+        </style>
+    </head>
+    <body>
+      
+
+        <div class="navbar">
+            
+            <a href="./index.html">Home</a>
+            <a href="./driving-schools.html">Driving Schools</a>
+            <a href="./driving-instructions.html">Driving Instructions</a>       
+            <a href="./rto-info.html">RTO Information</a>
+            <a href="./contact-us.html">Contact Us</a>
+            <a href="./signin.php">SIGN IN | SIGN UP</a>
+      </div>
+      <br><br>
+      <div class="homelink">
+          <h1 align="left"><a id ="homelink" href="./index.html">DriveSmart</a></h1>
+      </div>
+
+        <div class="div1">
+            <form action="./results.html" method = "POST">
+            <label for="location"></label>
+            <input type="text" id="loc" name="location" placeholder="Your location...">
+
+            <!-- <label for="vehicle">Vehicle type: </label>
+            <select id="Vehicle" name="vehicle">
+              <option value="2-Wheeler">2-Wheeler</option>
+              <option value="4-Wheeler">4-Wheeler</option>
+              <option value="Both">Both</option>
+            </select> -->
+
+            <button class="button" id="sub">
+                <a href="./results.html">Submit</a>
+            </button>
+            </form>
+      </div>
+      <br><br><br>
+
+      
+
+      <div class="div2">
+            <h3> Filters: </h3>
+            <form action="./results.html" method="POST">
+            <h4> Based on time of the day </h4>
+            <input type="checkbox" name="filter" value="morning"> Morning &nbsp &nbsp</input>
+            <input type="checkbox" name="filter" value="evening"> Evening &nbsp &nbsp</input>
+            <input type="checkbox" name="filter" value="night"> Night &nbsp &nbsp</input>
+            <br>
+            <h4> Based on Licensed </h4>
+            <input type="checkbox" name="filter" value="license"> License &nbsp &nbsp</input>
+            <input type="checkbox" name="filter" value="no_license"> No License &nbsp &nbsp</input>
+            <h4> Based on Distance of Driving School (in Km)</h4>
+            <input type="checkbox" name="filter" value="5km"> 0-5 &nbsp &nbsp</input>
+            <input type="checkbox" name="filter" value="10km"> 0-10 &nbsp &nbsp</input>
+            <input type="checkbox" name="filter" value="15km"> 0-15 &nbsp &nbsp</input>
+            <input type="checkbox" name="filter" value="rip"> 15+ &nbsp &nbsp</input>
+            <br><br>
+            <button class="button">
+                <a href="./results.html">Submit</a>
+            </button>
+          </form>
+      </div>
+      <a href="./test.html"><div id="result"></div></a>
+  <script>
+  
+            var area = localStorage.getItem("area");
+            document.getElementById("loc").value = area;
+            
+            function hasNumber(myString) {
+              return /\d/.test(myString);
+            }
+
+            var loc = document.getElementById("loc");
+            var submit = document.getElementById("sub");
+            submit.addEventListener("click", function (){
+              localStorage.setItem("area", loc.value);
+            }, false)
+
+            function distance(lat1, lon1, lat2, lon2, unit) {
+              var get_dist = new XMLHttpRequest();  
+              get_dist.open('GET', 'https://dev.virtualearth.net/REST/V1/Routes/Driving?o=json&wp.0='+String(lat1)+','+String(lon1)+'&wp.1='+String(lat2)+','+String(lon2)+'&key=AnpRPjKzg178aKBemszF_UpEVRuwq1CfEg0U-UOW_kFAElpHYH0VdyqHKzJx5ixK', false);   
+              get_dist.send(null);  
+              if(get_dist.status == 200)  
+                  return parseFloat(JSON.parse(get_dist.response)["resourceSets"][0]["resources"][0]["travelDistance"]);
+
+              // d = parseFloat(json.loads(response.text)['resourceSets'][0]['resources'][0]['travelDistance'])
+          }
+
+
+            
+
+            
+
+            $(function() {
+              var availableAreas = ["Banashankari", "Koramangala", "Bannerghatta", "Jayanagar", "Hebbal", "Yelahanka", "Whitefield", "Indiranagar"];
+              $("#loc").autocomplete({
+                source: availableAreas
+              });
+            });
+
+            var schools = {
+              place1: {name: "Lotus Driving School", coords: {lat: 12.9192, long: 77.56132}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving1.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759384},
+              place2: {name: "Rose Driving School", coords: {lat: 12.8813, long: 77.6102}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving2.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759484},
+              place3: {name: "Tulip Driving School", coords: {lat: 12.7643, long: 77.56066}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving3.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9948751384},
+              place4: {name: "Lily Driving School", coords: {lat: 12.333, long: 77.56995}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving4.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9938759384},
+              place5: {name: "Swift Driving School", coords: {lat: 12.5090, long: 77.4934}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving5.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9248759384},
+              place6: {name: "Mercedes Driving School", coords: {lat: 13.1967, long: 77.5934}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving6.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 8948759384},
+              place7: {name: "Maruti Driving School", coords: {lat: 12.9669, long: 77.6433}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving7.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9943759384},
+              place8: {name: "Honda Driving School", coords: {lat: 12.95696, long: 77.756}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving8.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948459384},
+              place9: {name: "BMW Driving School", coords: {lat: 12.97989, long: 77.7123}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving9.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948755384},
+              place10: {name: "Jaguar Driving School", coords: {lat: 12.8431, long: 77.59932}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving10.jpg", time: {morning: true, afternoon: true, night: true}, license: true, phone: 9928759384},
+              place11: {name: "Cheetah Driving School", coords: {lat: 12.9633, long: 77.6234}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving1.jpg", time: {morning: true, afternoon: true, night: false}, license: false, phone: 9148759384},
+              place12: {name: "Tiger Driving School", coords: {lat: 12.9344, long: 77.5783}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving2.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9944759384},
+              place13: {name: "Lion Driving School", coords: {lat: 13.0329, long: 77.54201}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving3.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948559384},
+              place14: {name: "Leopard Driving School", coords: {lat: 12.9992, long: 77.6434}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving4.jpg", time: {morning: true, afternoon: true, night: true}, license: true, phone: 9548759384},
+              place15: {name: "Fox Driving School", coords: {lat: 13.1192, long: 77.590125}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving5.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948749384},
+              place16: {name: "Earth Driving School", coords: {lat: 12.96782, long: 77.750766}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving6.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9946759384},
+              place17: {name: "Wind Driving School", coords: {lat: 12.8592, long: 77.60012}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving7.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948459384},
+              place18: {name: "Fire Driving School", coords: {lat: 12.95869, long: 77.69935}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving8.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948859384},
+              place19: {name: "Water Driving School", coords: {lat: 12.9704, long: 77.69043}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving9.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9945759384},
+              place20: {name: "Summer Driving School", coords: {lat: 12.927020, long: 77.546652}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving10.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9998759384},
+              place21: {name: "Winter Driving School", coords: {lat: 12.8990, long: 77.5873}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving1.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9918759384},
+              place22: {name: "Autumn Driving School", coords: {lat: 12.92103, long: 77.57576}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving2.jpg", time: {morning: true, afternoon: true, night: true}, license: false, phone: 9908759384},
+              place23: {name: "Spring Driving School", coords: {lat: 12.97923, long: 77.6534}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving3.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9950759384},
+              place24: {name: "Gears Driving School", coords: {lat: 13.14094001, long: 77.590235}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving4.jpg", time: {morning: true, afternoon: true, night: true}, license: true, phone: 7948759384},
+              place25: {name: "Levers Driving School", coords: {lat: 13.14606028, long: 77.584354}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving5.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948759004},
+              place26: {name: "Level Driving School", coords: {lat: 12.942045, long: 77.62468}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving6.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759380},
+              place27: {name: "Traversal Driving School", coords: {lat: 13.0007959, long: 77.590395}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving7.jpg", time: {morning: true, afternoon: true, night: true}, license: false, phone: 9948759381},
+              place28: {name: "Breadth Driving School", coords: {lat: 12.927506, long: 77.575432}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving8.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759324},
+              place29: {name: "Depth Driving School", coords: {lat: 12.806769192, long: 77.577738}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving9.jpg", time: {morning: true, afternoon: true, night: true}, license: true, phone: 9948759382},
+              place30: {name: "Technology Driving School", coords: {lat: 12.9676192, long: 77.748604}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving10.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948757384},
+              place31: {name: "New Driving School", coords: {lat: 12.860876087, long: 77.589486}, mode_taught: {two: false, four: true}, lady_teacher: false, picture: "./images/driving1.jpg", time: {morning: false, afternoon: true, night: true}, license: false, phone: 9948759383},
+              place32: {name: "Trendy Driving School", coords: {lat: 12.780992, long: 77.640385}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving2.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759374},
+              place33: {name: "Smart Driving School", coords: {lat: 12.889098859, long: 77.563563}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving3.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9948751384},
+              place34: {name: "Genius Driving School", coords: {lat: 12.91008956, long: 77.56093759}, mode_taught: {two: true, four: true}, lady_teacher: false, picture: "./images/driving4.jpg", time: {morning: true, afternoon: true, night: true}, license: false, phone: 9948750384},
+              place35: {name: "King Driving School", coords: {lat: 12.86078554, long: 77.5794732}, mode_taught: {two: false, four: true}, lady_teacher: true, picture: "./images/driving5.jpg", time: {morning: false, afternoon: true, night: true}, license: true, phone: 9948759385},
+              place36: {name: "Queen Driving School", coords: {lat: 12.87650780, long: 77.653593}, mode_taught: {two: true, four: true}, lady_teacher: true, picture: "./images/driving6.jpg", time: {morning: true, afternoon: true, night: false}, license: true, phone: 9948759084}
+              
+            }
+
+            function get_nearest_group(start) {
+              var lat1 = start[0];
+              var lon1 = start[1];
+              let index = 0;
+              var coords = [];
+              var distances = [];
+              var values = Object.values(schools);
+              var names = [];
+              for(var i = 0 ; i < values.length ; i++) {
+                  names.push(Object.values(Object.values(values[i])[0]));
+              }
+              //var names = Object.values(Object.values(values[i][0]));
+              for(var i = 0 ; i < values.length ; i++) {
+                  coords.push(Object.values(Object.values(values[i])[1]));
+              }
+              //console.log(coords);
+              var temp1, temp2;
+              //asc_schools[0] = names[0];
+              for(var i = 0 ; i < coords.length ; i++) {
+                  dist = distance(lat1, lon1, coords[i][0], coords[i][1]);
+                  distances.push(dist);
+              }
+              for(var i = 0; i<values.length; i++)
+                for(var j = 0; j<values.length-i-1; j++)
+                {
+                  if(distances[j]>distances[j+1])
+                  {
+                    temp1 = distances[j];
+                    distances[j] = distances[j+1];
+                    distances[j+1] = temp1;
+                    temp2 = values[j];
+                    values[j] = values[j+1];
+                    values[j+1] = temp2;
+                    
+                  }
                 }
-                $username = $_SESSION['username'];
-                $sql = "SELECT name, location, phoneno FROM accounts WHERE username = '$username' LIMIT 1";
-                $result = mysqli_query($db, $sql);
-                $row = mysqli_fetch_assoc($result);
-                echo "<br><br><br><br>". "Name: " . $row["name"]. "<br><br><br>". "Location: " . $row["location"]. "<br><br><br>". " Phone Number: " . $row["phoneno"].  "<br><br><br>";
-			?>
-		</section>
-		<footer style="color: white; position: fixed; bottom: 20px;">
+              return values;
+          }
+
+          if(hasNumber(area))
+            {
+              var coords = area.split(" ");
+              var result = get_nearest_group(coords);
+
+              var main = document.getElementById("result");
+            var br = document.createElement("br");
+            for(var i = 0 ; i < Object.values(schools).length ; i++) {
+              //console.log("lol");
+              var div = document.createElement("div");
+              div.setAttribute("class","driving_school");
+
+              var p = document.createElement("h3");
+              p.class = "name";
+              p.innerHTML = "Name: " + Object.values(result)[i].name;
+
+              div.appendChild(br);
+              div.appendChild(p);
+              div.appendChild(br);
+
+              var img = document.createElement("img");
+
+              img.src = Object.values(result)[i].picture;
+              img.alt = "school";
+              img.style = "width:20%";
+              div.appendChild(br);
+              div.appendChild(img);
+              div.appendChild(br);
+
+              var dis = document.createElement("p");
+              dis.class = "distance";
+              var coo = Object.values(result)[i].coords;
+              //console.log(Object.values(result)[i].phone.type);
+              dis.innerHTML = "Latitude: " + String(coo["lat"]) + "<br><br> Longitude: " + String(coo["long"]);
+              div.appendChild(br);
+              div.appendChild(dis);
+              div.appendChild(br);
+
+              var phone = document.createElement("p");
+              phone.class = "phone";
+              console.log(Object.values(result)[i].phone.type);
+              phone.innerHTML = "Phone number: " + String(Object.values(result)[i].phone);
+              div.appendChild(br);
+              div.appendChild(phone);
+              div.appendChild(br);
+
+              var mode = document.createElement("p");
+              mode.class = "mode";
+
+              if(Object.values(result)[i].mode_taught.two && Object.values(result)[i].mode_taught.four) {
+                  mode.innerHTML = "Modes taught: 2 wheeler and 4 wheeler";
+              } else if(Object.values(result)[i].mode_taught.two) {
+                  mode.innerHTML = "Modes taught: 2 wheeler";
+              } else if(Object.values(result)[i].mode_taught.four) {
+                  mode.innerHTML = "Modes taught: 4 wheeler";
+              }
+              div.appendChild(br);
+              div.appendChild(mode);
+              div.appendChild(br);
+
+              var lady_teach = document.createElement("p");
+              lady_teach.class = "lady_teacher";
+
+              if(Object.values(result)[i].lady_teacher) {
+                  lady_teach.innerHTML = "Female teachers available";
+              } else {
+                  lady_teach.innerHTML = "Female teachers not available";
+              }
+
+              div.appendChild(br);
+              div.appendChild(lady_teach);
+              div.appendChild(br);
+
+              var time = document.createElement("p");
+              time.class = "time";
+              var time_string = "";
+              for(var j=0;j<Object.values(Object.values(result)[i].time).length;j++) {
+                  if(Object.values(Object.values(result)[i].time)[j]) {
+                      time_string += String(Object.keys(Object.values(result)[i].time)[j]);
+                      time_string += " ";
+                  }
+              }
+              time.innerHTML = "Open during: " + time_string;
+
+              div.appendChild(br);
+              div.appendChild(time);
+              div.appendChild(br);
+
+              var license = document.createElement("p");
+              license.class = "license";
+
+              if(Object.values(result)[i].license) {
+                  license.innerHTML = "Licensing available";
+              } else {
+                  license.innerHTML = "Licensing not available";
+              }
+
+              div.appendChild(br);
+
+              main.appendChild(div);
+              
+              var space = document.createElement("div");
+              space.setAttribute("class", "gap");
+              main.appendChild(space);
+
+          }
+              
+            }
+            else {
+              var url = "https://eu1.locationiq.com/v1/search.php?key=6ac07da31cfefe&q=" + area + "%20Bengaluru&format=json";
+              var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": url,
+                "method": "GET"
+              }
+
+                            
+
+              $.ajax(settings).done(function (response) {
+                var coords = [];
+                var v = Object.values(response);
+                var u = v[0];
+                coords[0] = u["lat"];
+                coords[1] = u["lon"];
+                //console.log(coords);
+                var result = get_nearest_group(coords);
+                console.log(result[0]);
+
+                var main = document.getElementById("result");
+                var br = document.createElement("br");
+                for(var i = 0 ; i < Object.values(schools).length ; i++) {
+                //console.log("lol");
+                var div = document.createElement("div");
+                div.setAttribute("class","driving_school");
+
+                var p = document.createElement("h3");
+                p.class = "name";
+                p.innerHTML = "Name: " + Object.values(result)[i].name;
+
+                div.appendChild(br);
+                div.appendChild(p);
+                div.appendChild(br);
+
+                var img = document.createElement("img");
+
+                img.src = Object.values(result)[i].picture;
+                img.alt = "school";
+                img.style = "width:20%";
+                div.appendChild(br);
+                div.appendChild(img);
+                div.appendChild(br);
+
+                var dis = document.createElement("p");
+                dis.class = "distance";
+                var coo = Object.values(result)[i].coords;
+                //console.log(Object.values(result)[i].phone.type);
+                dis.innerHTML = "Latitude: " + String(coo["lat"]) + "<br><br> Longitude: " + String(coo["long"]);
+                div.appendChild(br);
+                div.appendChild(dis);
+                div.appendChild(br);
+
+                var phone = document.createElement("p");
+                phone.class = "phone";
+                console.log(Object.values(result)[i].phone.type);
+                phone.innerHTML = "Phone number: " + String(Object.values(result)[i].phone);
+                div.appendChild(br);
+                div.appendChild(phone);
+                div.appendChild(br);
+
+                var mode = document.createElement("p");
+                mode.class = "mode";
+
+                if(Object.values(result)[i].mode_taught.two && Object.values(result)[i].mode_taught.four) {
+                    mode.innerHTML = "Modes taught: 2 wheeler and 4 wheeler";
+                } else if(Object.values(result)[i].mode_taught.two) {
+                    mode.innerHTML = "Modes taught: 2 wheeler";
+                } else if(Object.values(result)[i].mode_taught.four) {
+                    mode.innerHTML = "Modes taught: 4 wheeler";
+                }
+                div.appendChild(br);
+                div.appendChild(mode);
+                div.appendChild(br);
+
+                var lady_teach = document.createElement("p");
+                lady_teach.class = "lady_teacher";
+
+                if(Object.values(result)[i].lady_teacher) {
+                    lady_teach.innerHTML = "Female teachers available";
+                } else {
+                    lady_teach.innerHTML = "Female teachers not available";
+                }
+
+                div.appendChild(br);
+                div.appendChild(lady_teach);
+                div.appendChild(br);
+
+                var time = document.createElement("p");
+                time.class = "time";
+                var time_string = "";
+                for(var j=0;j<Object.values(Object.values(result)[i].time).length;j++) {
+                    if(Object.values(Object.values(result)[i].time)[j]) {
+                        time_string += String(Object.keys(Object.values(result)[i].time)[j]);
+                        time_string += " ";
+                    }
+                }
+                time.innerHTML = "Open during: " + time_string;
+
+                div.appendChild(br);
+                div.appendChild(time);
+                div.appendChild(br);
+
+                var license = document.createElement("p");
+                license.class = "license";
+
+                if(Object.values(result)[i].license) {
+                    license.innerHTML = "Licensing available";
+                } else {
+                    license.innerHTML = "Licensing not available";
+                }
+
+                div.appendChild(br);
+
+                main.appendChild(div);
+                
+                var space = document.createElement("div");
+                space.setAttribute("class", "gap");
+                main.appendChild(space);
+                }  
+                })
+            }
+
+            
+  </script>
+  <footer style="color: white; position: fixed; bottom: 20px;">
             Created by: Akshatha Laxmi, Ishitha Agarwal and Saksham Gupta. &copy;
         </footer>
-	</body>
-</html>	
+</body>
+</html>
