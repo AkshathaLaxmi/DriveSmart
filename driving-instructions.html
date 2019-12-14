@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel = "stylesheet" href="./drivesmart.css">
         <title>DriveSmart</title>
         <link rel = "stylesheet" href="./drivesmart.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
         <style>
+        body {
+            background-image: url("./images/Traffic.png");
+            
+            height: 100vh;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
         .button{
             background-color: #3197c7;
             border: none;
@@ -25,47 +38,48 @@
 
         #info{
             padding: 15px 32px;
-            text-align: center;
+            	text-align: center;
             margin: 20px;
         }
 
         #list{
             color:#205b9e;
+            padding: 0 30px;
         }
+
+        #body{
+            background-color:rgba(0, 0, 0, 0.842);
+        }
+        #body li{
+            color: rgb(185, 233, 255);
+        }
+        
         </style>
     </head>
     <body>
-        <div>
-                <table>
-                        <tr>
-                            <td>
-                                    <h1 align="left"><a id ="homelink" href="./home.html">DriveSmart</a></h1>
-                            </td>
-                            <td width="79.1%"></td>
-                            <td>
-                                <p align="right"><a id="sign" href="./signin.html">SIGN UP | SIGN IN</a></p>
-                            </td>
-                        </tr>   
-                    </table>
+        <div class="homelink">
+                
+            <h1 align="left"><a id ="homelink" href="./index.html">DriveSmart</a></h1>
+                        
         </div>
-        
-        <div id="navbar">
-            <ul>
-                <li><a href="./home.html">Home</a></li>
-                <li><a href="./driving-schools.html">Driving Schools</a></li>
-                <li><a href="./driving-instructions.html">Driving Instructions</a></li>          
-                <li><a href="./rto-info.html">RTO Information</a></li>
-                <li><a href="./contact-us.html">Contact Us</a></li>
-            </ul>
+
+        <div class="navbar">
+            
+                <a href="./index.html" style="text-decoration: none;">Home</a>
+                <a href="./driving-schools.html" style="text-decoration: none;">Driving Schools</a>
+                <a href="./driving-instructions.html" style="text-decoration: none;">Driving Instructions</a>       
+                <a href="./rto-info.html" style="text-decoration: none;">RTO Information</a>
+                <a href="./contact-us.html" style="text-decoration: none;">Contact Us</a>
+                <a href="./signin.php" style="text-decoration: none;">SIGN IN | SIGN UP</a>
+            
         </div>
-        
-        <div>
+        <div id = "body" style ="margin:0px;">
             <table>
                 <tr>
                     <td width="2%"></td>
 
                     <td>
-                        <h2 id="list">Driving Instructions:</h2>
+                        <h2 id="list" style="color:rgb(185, 233, 255);">Driving Instructions:</h2>
                         <br>
                         <br>
                         <ul id="list">
@@ -87,11 +101,15 @@
                     <td>
                         <br>
                         <img src="https://cdn.pixabay.com/photo/2017/09/09/18/24/driving-2732934_960_720.jpg" width="800px" height="600px">
+                        <br><br>
                     </td>
                     <td width="5%"></td>
                 </tr>
             </table>
         </div>
-                
+        <footer style="color: white; position: fixed; bottom: 20px;">
+            Created by: Akshatha Laxmi, Ishitha Agarwal and Saksham Gupta. &copy;
+        </footer>
+       </body>         
 
 </html>
