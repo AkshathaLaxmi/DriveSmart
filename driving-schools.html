@@ -3,8 +3,13 @@
 <html>
     <head>
         <title>DriveSmart</title>
-        <link rel = "stylesheet" href="./drivesmart.css">
+        <link rel = "stylesheet" href="./drivesmart.css"/>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
         <style>
+        
         .button{
             background-color: #3197c7;
             border: none;
@@ -16,6 +21,7 @@
         }
         .button:hover{
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            transform: scale(1.1);
         }
 
         input[type=text], .select {
@@ -25,25 +31,33 @@
           margin-right: 100px;
           display: inline-block;
           border: 1px solid #ccc;
-          border-radius: 4px;
+          border-radius: 10px;
           box-sizing: border-box;
         }
 
         input[type=submit] {
           width: 15%;
-          background-color: #4CAF50;
+          background-color: rgb(76, 152, 175);
           color: white;
           padding: 14px 20px;
           margin: 8px 0;
           margin-left: 100px;
           border: 100px;
-          border-radius: 4px;
+          border-radius: 13px;
           cursor: pointer;
+          opacity: 0.8;
         }
 
-        input[type=submit]:hover {
-          background-color: #45a049;
+        input[type=submit]:hover{
+          transform: scale(1.1);
+          opacity: 1;
         }
+
+        .button a{
+            text-decoration: none;
+            color: black;
+        }
+
 
         .div1 {
           margin: 25px;
@@ -60,50 +74,114 @@
             text-decoration: none;
             color: white;
         }
-
+        
+        #map {
+          width: 60%;
+          margin: 0 auto;
+          height: 600px;
+          background-color: grey;
+        }
+        footer{
+            color: white;
+            position: fixed;
+            bottom: 20px;
+        }
         </style>
+        
     </head>
     <body>
-      <div>
-        <table>
-          <tr>
-            <td>
-              <h1 align="left"><a id ="homelink" href="./home.html">DriveSmart</a></h1>
-            </td>
-            <td width="79.1%"></td>
-              <td>
-                <p align="right"><a id="sign" href="./signin.html">SIGN UP | SIGN IN</a></p>
-              </td>
-            </tr>
-          </table>
+      <div class="homelink">
+        
+              <h1 align="left"><a id ="homelink" href="./index.html">DriveSmart</a></h1>
+           
         </div>
 
-        <div id="navbar">
-            <ul>
-                <li><a href="./home.html">Home</a></li>
-                <li><a href="./driving-schools.html">Driving Schools</a></li>
-                <li><a href="./driving-instructions.html">Driving Instructions</a></li>
-                <li><a href="./rto-info.html">RTO Information</a></li>
-                <li><a href="./contact-us.html">Contact Us</a></li>
-            </ul>
+        <div class="navbar">
+            
+                <a href="./index.html">Home</a>
+                <a href="./driving-schools.html">Driving Schools</a>
+                <a href="./driving-instructions.html">Driving Instructions</a>       
+                <a href="./rto-info.html">RTO Information</a>
+                <a href="./contact-us.html">Contact Us</a>
+                <a href="./signin.php">SIGN IN | SIGN UP</a>
+            
         </div>
 
         <div class="div1">
-            <form action="/action_page.php">
+            <form action="results.html" method = "POST">
             <label for="location"></label>
-            <input type="text" id="location" name="location" placeholder="Your location..">
+            <input type="text" id="location" name="location" placeholder="Your location...">
 
-            <label for="vehicle">Vehicle type: </label>
+            <!-- <label for="vehicle">Vehicle type: </label>
             <select id="Vehicle" name="vehicle">
               <option value="2-Wheeler">2-Wheeler</option>
               <option value="4-Wheeler">4-Wheeler</option>
               <option value="both">Both</option>
-            </select>
+            </select> -->
 
-            <input type="submit" value="Submit">
+            <input type="Submit" value="Search" id = "submit">
             </form>
             </div>
+            <div id='map'></div>
+          <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+          <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+          
+          <script>
 
-        <img src="https://live.staticflickr.com/3803/10012162166_cde34d427e_b.jpg" alt="Image of World Map" class="center">
+            var maps = document.getElementById("map");
+            maps.addEventListener("click", NavigationOn, false);
 
+            function showLocation(position){
+              var inputs = document.getElementById("location");
+              inputs.value = position.coords.latitude + " " + position.coords.longitude;
+            }
+            function NavigationOn(){
+              if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showLocation);
+              }
+              else{
+                alert("Enter location!");
+              }
+            }
+            
+            mapboxgl.accessToken = 'pk.eyJ1IjoiYWtzaGF0aGFsYXhtaSIsImEiOiJjazM1ZDNnOHIxZGY1M2hwYnhlODFzdncyIn0.gotdzFSsNUvhJ55z_6yJNQ';
+            var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v10',
+            center: [77.5345, 18.9345], // starting position
+            zoom: 4
+            });
+
+            map.addControl(new mapboxgl.GeolocateControl({
+            positionOptions: {
+            enableHighAccuracy: true
+            },
+            trackUserLocation: true
+            }));
+            
+
+            
+
+            $(function() {
+              var availableAreas = ["Banashankari", "Koramangala", "Bannerghatta", "Jayanagar", "Hebbal", "Yelahanka", "Whitefield", "Indiranagar"];
+              $("#location").autocomplete({
+                source: availableAreas
+              });
+            });
+
+
+            var submit = document.getElementById("submit");
+            submit.addEventListener("click", function () {
+              var location = document.getElementById("location").value;
+              localStorage.setItem("area", location);
+            }, false);
+            
+            
+
+          </script>
+        
+        <footer style="color: white; position: fixed; bottom: 20px;">
+            Created by: Akshatha Laxmi, Ishitha Agarwal and Saksham Gupta. &copy;
+        </footer>
+        </body> 
 </html>
